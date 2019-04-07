@@ -37,11 +37,25 @@
             app:layout_constraintTop_toBottomOf="@+id/kword_label" />
 
         <TextView
+            android:id="@+id/kworderror"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="10dp"
+            android:text="Please enter mandatory field"
+            android:textColor="@android:color/holo_red_light"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/category_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kword"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
             android:id="@+id/category_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="Category"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kword" />
@@ -187,11 +201,13 @@
             app:layout_constraintTop_toBottomOf="@+id/from_label">
 
             <RadioButton
+                android:id="@+id/current_loc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Current location" />
 
             <RadioButton
+                android:id="@+id/zip_loc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="" />
@@ -213,12 +229,28 @@
             app:layout_constraintStart_toStartOf="@+id/radioGroup"
             app:layout_constraintTop_toTopOf="@+id/radioGroup" />
 
+        <TextView
+            android:id="@+id/ziperror"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Please enter mandatory field"
+            android:textColor="@android:color/holo_red_light"
+            android:visibility="invisible"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/submitBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/zipcode" />
+
         <Button
             android:id="@+id/submitBtn"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/formBtnBackground"
+            android:textColor="@android:color/white"
             android:text="Search"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
@@ -228,9 +260,11 @@
             android:layout_width="167dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:text="Clear"
+            android:textColor="@android:color/white"
+            android:background="@color/formBtnBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/submitBtn"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />

@@ -2,5 +2,6 @@
 <resources>
     <color name="colorPrimary">#6100ef</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#b084e3</color>
+    <color name="formBtnBackground">#fb5621</color>
 </resources>
