@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Product Search</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_text_1">Search</string>
+    <string name="tab_text_2">Wishlist</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string-array name="categoryArray">
+        <item>
+            All
+        </item>
+        <item>
+            Art
+        </item>
+        <item>
+            Baby
+        </item>
+        <item>
+            Books
+        </item>
+        <item>
+           Clothing,shoes &amp; Accessories
+        </item>
+        <item>
+            Computers,Tablets &amp; Networking
+        </item>
+        <item>
+            Health &amp; Beauty
+        </item>
+        <item>
+            Music
+        </item>
+        <item>
+            Video Games &amp; Consoles
+        </item>
+    </string-array>
+</resources>
