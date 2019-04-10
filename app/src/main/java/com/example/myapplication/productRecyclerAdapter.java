@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -43,6 +45,7 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
        //we set the values of elements from layout from our list of class objects
 
         //use picasso to load image here
+        Picasso.with(con).load(prlist.getImage_url()).into(viewHolder.productImage);
         viewHolder.productTitle.setText(prlist.getTitle());
         viewHolder.productPrice.setText(prlist.getProduct_price());
         viewHolder.productCondition.setText(prlist.getProduct_condition());

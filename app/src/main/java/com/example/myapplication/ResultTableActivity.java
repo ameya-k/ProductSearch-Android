@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -50,7 +51,7 @@ public class ResultTableActivity extends AppCompatActivity {
         //Starting the recycler view process here
         productRecyclerView=findViewById(R.id.productrecyclerview);
         productRecyclerView.setHasFixedSize(true);
-        productRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        productRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
         productslist=new ArrayList<>();
 
 
@@ -109,14 +110,36 @@ public class ResultTableActivity extends AppCompatActivity {
                 JSONObject newObj=resArray.getJSONObject(i);
 
                 //Surround each with try catch
+                String imgUrl="";
+                try {
+                    imgUrl = newObj.getJSONArray("galleryURL").get(0).toString();
+                }catch (JSONException je){
 
-                String imgUrl=newObj.getJSONArray("galleryURL").get(0).toString();
-                String title=newObj.getJSONArray("title").get(0).toString();
-                String zip=newObj.getJSONArray("postalCode").get(0).toString();
-                String shipping=newObj.getJSONArray("shippingInfo").getJSONObject(0).
-                        getJSONArray("shippingServiceCost").getJSONObject(0).getString("__value__");
+                }
+                String title="";
+                try {
+                    title = newObj.getJSONArray("title").get(0).toString();
+                }catch (JSONException je){
+                    title="N/A";
+                }
+                String zip="";
+                try {
+                    zip = "Zip: "+ newObj.getJSONArray("postalCode").get(0).toString();
+                } catch (JSONException je){
+                    zip="Zip: "+"N/A";
+                }
+                String shipping="";
+                try {
+                    shipping = newObj.getJSONArray("shippingInfo").getJSONObject(0).
+                            getJSONArray("shippingServiceCost").getJSONObject(0).getString("__value__");
+                }catch (JSONException je){
+                    shipping="N/A";
+                }
                 if(shipping.equalsIgnoreCase("0")||shipping.equalsIgnoreCase("0.0")){
-                    shipping="Free";
+                    shipping="Free Shipping";
+                }
+                else{
+                    shipping="$"+shipping;
                 }
                 //Log.i("ship value",shipping);
                 String cond;
@@ -127,8 +150,13 @@ public class ResultTableActivity extends AppCompatActivity {
                     cond="N/A";
                 }
                // Log.i("cond",cond);
-                String price="$"+newObj.getJSONArray("sellingStatus").getJSONObject(0).
-                        getJSONArray("currentPrice").getJSONObject(0).getString("__value__");
+                String price="";
+                try {
+                    price = "$" + newObj.getJSONArray("sellingStatus").getJSONObject(0).
+                            getJSONArray("currentPrice").getJSONObject(0).getString("__value__");
+                }catch (JSONException je){
+                    price="N/A";
+                }
                 productRecyclerList list=new productRecyclerList(imgUrl,title,zip,shipping,cond,price);
                 productslist.add(list);
                 //productRecyclerList newList=new productRecyclerList()
