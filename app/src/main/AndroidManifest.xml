@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ResultTableActivity"></activity>
+        <activity android:name=".ResultTableActivity"
+            android:label="Search Results">
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:label="Product Search"

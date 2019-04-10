@@ -100,6 +100,7 @@ public class searchForm extends Fragment {
                 try {
                     JSONObject ipobject=new JSONObject(response);
                     curloc=ipobject.getString("zip");
+                    Log.i("curloc",curloc);
 
 
                 } catch (JSONException e) {

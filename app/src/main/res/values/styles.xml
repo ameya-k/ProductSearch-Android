@@ -8,7 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="progressWheel" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColorPrimary">
+            @color/colorPrimary
+        </item>
 
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
