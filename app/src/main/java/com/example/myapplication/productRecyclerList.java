@@ -8,15 +8,24 @@ public class productRecyclerList {
     private String product_shipping;
     private String product_condition;
     private String product_price;
+    private String item_id;
 
-    public productRecyclerList(String image_url, String title, String product_zip, String product_shipping, String product_condition, String product_price) {
+    public productRecyclerList(String image_url, String title, String product_zip, String product_shipping,
+                               String product_condition, String product_price,String item_id) {
         this.image_url = image_url;
         this.title = title;
         this.product_zip = product_zip;
         this.product_shipping = product_shipping;
         this.product_condition = product_condition;
         this.product_price = product_price;
+        this.item_id=item_id;
     }
+
+    public String getItem_id() {
+        return item_id;
+    }
+
+
 
     public String getImage_url() {
         return image_url;
@@ -33,6 +42,8 @@ public class productRecyclerList {
     public String getProduct_shipping() {
         return product_shipping;
     }
+
+
 
     public String getProduct_condition() {
         return product_condition;

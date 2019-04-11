@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,7 +12,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,6 +38,9 @@ public class ResultTableActivity extends AppCompatActivity {
 
     private RecyclerView.Adapter adapter;
     private List<productRecyclerList> productslist;
+    private Button wishBtn;
+    private int size;
+    String prodTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -41,12 +49,17 @@ public class ResultTableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_table);
 
+        wishBtn=findViewById(R.id.wishbtn);
+
+
         Intent intent=getIntent();
         final ProgressDialog spinwheel=new ProgressDialog(this);
-        spinwheel.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
-        spinwheel.setMessage("Searching Products...");
 
-        spinwheel.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        //spinwheel.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+        //spinwheel.setMessage("Searching Products...");
+
+        //spinwheel.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
 
         //Starting the recycler view process here
         productRecyclerView=findViewById(R.id.productrecyclerview);
@@ -57,12 +70,13 @@ public class ResultTableActivity extends AppCompatActivity {
 
 
         String nodeUrl=intent.getStringExtra("url");
+        prodTitle=intent.getStringExtra("kw");
         Log.i("Url in result activty",nodeUrl);
-        spinwheel.show();
+        //spinwheel.show();
         StringRequest resultRequest=new StringRequest(Request.Method.GET, nodeUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                    spinwheel.dismiss();
+                    //sspinwheel.dismiss();
                 try {
 
 
@@ -86,13 +100,22 @@ public class ResultTableActivity extends AppCompatActivity {
         RequestQueue rq= Volley.newRequestQueue(getApplicationContext());
         rq.add(resultRequest);
 
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 
 
 
 
+    }
 
+
+    //Logic to implement on back button
+    @Override
+    public boolean onSupportNavigateUp(){
+        Toast.makeText(getApplicationContext(),"hello",Toast.LENGTH_SHORT).show();
+        return true;
     }
 
     private void constructRecylerView(JSONObject resObj) {
@@ -102,6 +125,9 @@ public class ResultTableActivity extends AppCompatActivity {
             JSONArray resArray=resObj.getJSONArray("findItemsAdvancedResponse").getJSONObject(0).
                     getJSONArray("searchResult").getJSONObject(0).getJSONArray("item");
             JSONObject jb=resArray.getJSONObject(0);
+            size=resArray.length();
+            TextView reshead=findViewById(R.id.resultCountText);
+            reshead.setText("Showing "+size+ " results for "+prodTitle);
             Log.i("demo json",""+jb.getJSONArray("title").get(0).toString());
 
 
@@ -157,7 +183,11 @@ public class ResultTableActivity extends AppCompatActivity {
                 }catch (JSONException je){
                     price="N/A";
                 }
-                productRecyclerList list=new productRecyclerList(imgUrl,title,zip,shipping,cond,price);
+
+                String itemid=newObj.getJSONArray("itemId").get(0).toString();
+
+
+                productRecyclerList list=new productRecyclerList(imgUrl,title,zip,shipping,cond,price,itemid);
                 productslist.add(list);
                 //productRecyclerList newList=new productRecyclerList()
             }

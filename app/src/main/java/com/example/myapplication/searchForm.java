@@ -176,6 +176,7 @@ public class searchForm extends Fragment {
 
                     Intent goToresult=new Intent(getActivity(),ResultTableActivity.class);
                     goToresult.putExtra("url",callUrl);
+                    goToresult.putExtra("kw",keyword.getText().toString());
                     startActivity(goToresult);
 
                     Log.i("url call:",callUrl);

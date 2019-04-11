@@ -1,12 +1,14 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -52,6 +54,14 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
         viewHolder.productShipping.setText(prlist.getProduct_shipping());
         viewHolder.productZip.setText(prlist.getProduct_zip());
 
+        viewHolder.lLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent i=new Intent(v.getContext(),prodDetailsActivity.class);
+               v.getContext().startActivity(i);
+            }
+        });
+
 
 
 
@@ -73,6 +83,7 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
         public TextView productShipping;
         public TextView productCondition;
         public TextView productPrice;
+        public LinearLayout lLayout;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -84,6 +95,8 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
             productShipping=itemView.findViewById(R.id.productShippingView);
             productCondition=itemView.findViewById(R.id.productConditionView);
             productPrice=itemView.findViewById(R.id.productPriceView);
+            lLayout=itemView.findViewById(R.id.cardLinear);
+
         }
     }
 }
