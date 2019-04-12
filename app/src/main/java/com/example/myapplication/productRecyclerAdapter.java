@@ -42,7 +42,7 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
-       productRecyclerList prlist=productslist.get(i);
+       final productRecyclerList prlist=productslist.get(i);
 
        //we set the values of elements from layout from our list of class objects
 
@@ -58,6 +58,7 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
             @Override
             public void onClick(View v) {
                Intent i=new Intent(v.getContext(),prodDetailsActivity.class);
+               i.putExtra("firstData",prlist);
                v.getContext().startActivity(i);
             }
         });

@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,8 @@ public class ResultTableActivity extends AppCompatActivity {
     private Button wishBtn;
     private int size;
     String prodTitle;
+    ProgressBar pb;
+    TextView tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -50,6 +53,10 @@ public class ResultTableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result_table);
 
         wishBtn=findViewById(R.id.wishbtn);
+        pb=findViewById(R.id.progressBarResult);
+        tv=findViewById(R.id.showProductsText);
+        pb.setVisibility(View.VISIBLE);
+        pb.setVisibility(View.VISIBLE);
 
 
         Intent intent=getIntent();
@@ -82,7 +89,8 @@ public class ResultTableActivity extends AppCompatActivity {
 
                     JSONObject resObj=new JSONObject(response);
                     Log.i("Result json",resObj.toString());
-
+                    pb.setVisibility(View.GONE);
+                    tv.setVisibility(View.GONE);
                     constructRecylerView(resObj);
 
                 } catch (JSONException e) {

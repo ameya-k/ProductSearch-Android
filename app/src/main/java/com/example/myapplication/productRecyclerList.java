@@ -1,6 +1,9 @@
 package com.example.myapplication;
 
-public class productRecyclerList {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class productRecyclerList implements Parcelable {
 
     private String image_url;
     private String title;
@@ -20,6 +23,8 @@ public class productRecyclerList {
         this.product_price = product_price;
         this.item_id=item_id;
     }
+
+
 
     public String getItem_id() {
         return item_id;
@@ -52,4 +57,45 @@ public class productRecyclerList {
     public String getProduct_price() {
         return product_price;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeString(image_url);
+        dest.writeString(title);
+        dest.writeString(product_zip);
+        dest.writeString(product_shipping);
+        dest.writeString(product_condition);
+        dest.writeString(product_price);
+        dest.writeString(item_id);
+    }
+
+
+    protected productRecyclerList(Parcel in) {
+        image_url = in.readString();
+        title = in.readString();
+        product_zip = in.readString();
+        product_shipping = in.readString();
+        product_condition = in.readString();
+        product_price = in.readString();
+        item_id = in.readString();
+    }
+
+    public static final Creator<productRecyclerList> CREATOR = new Creator<productRecyclerList>() {
+        @Override
+        public productRecyclerList createFromParcel(Parcel in) {
+            return new productRecyclerList(in);
+        }
+
+        @Override
+        public productRecyclerList[] newArray(int size) {
+            return new productRecyclerList[size];
+        }
+    };
 }

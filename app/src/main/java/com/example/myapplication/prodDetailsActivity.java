@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,16 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class prodDetailsActivity extends AppCompatActivity {
 
@@ -36,6 +47,7 @@ public class prodDetailsActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    String nodeRequestUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +77,43 @@ public class prodDetailsActivity extends AppCompatActivity {
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+        productRecyclerList obj=getIntent().getExtras().getParcelable("firstData");
+        Log.i("Data from first:",""+obj.getTitle());
+
+
+        nodeRequestUrl="http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/itemDetailsCall/"+obj.getItem_id();
+        callItemDetails(nodeRequestUrl);
+
+
+
+
+    }
+
+    private void callItemDetails(String nodeRequestUrl) {
+
+        StringRequest request=new StringRequest(Request.Method.GET, nodeRequestUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject job=new JSONObject(response);
+                    Log.i("hello","inhere");
+                    Log.i("Item details JSON:",job.toString());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue rq= Volley.newRequestQueue(this);
+        rq.add(request);
 
 
     }
@@ -147,6 +196,7 @@ public class prodDetailsActivity extends AppCompatActivity {
             switch (position){
                 case 0:
                     f=new prodInfo();
+
                     break;
                 case 1:
                     f=new prodShip();
