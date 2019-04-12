@@ -34,6 +34,7 @@ import org.json.JSONObject;
 
 public class prodDetailsActivity extends AppCompatActivity {
 
+    Toolbar tb;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -49,7 +50,8 @@ public class prodDetailsActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
     String nodeRequestUrl;
-    productRecyclerList obj;
+    //productRecyclerList obj;
+    Bundle obj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,17 +76,26 @@ public class prodDetailsActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        tb=findViewById(R.id.toolbarProduct);
 
+
+
+
+
+
+       //obj=getIntent().getExtras().getParcelable("firstData");
+        //Log.i("Data from first:",""+obj.getTitle());
+        obj=getIntent().getExtras();
+
+        productRecyclerList tem=obj.getParcelable("firstData");
+        setSupportActionBar(tb);
+        tb.setTitle(tem.getTitle());
 
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        obj=getIntent().getExtras().getParcelable("firstData");
-        Log.i("Data from first:",""+obj.getTitle());
-
-
-        nodeRequestUrl="http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/itemDetailsCall/"+obj.getItem_id();
+        //nodeRequestUrl=" S
+        // "+obj.getItem_id();
         //callItemDetails(nodeRequestUrl);
 
 
@@ -201,20 +212,24 @@ public class prodDetailsActivity extends AppCompatActivity {
             switch (position){
                 case 0:
                    f=new prodInfo();
-                    Bundle b=new Bundle();
-                    b.putString("nodeUrl",nodeRequestUrl);
+                   // Bundle b=new Bundle();
+                   // b.putString("nodeUrl",nodeRequestUrl);
 
-                    f.setArguments(b);
+                    f.setArguments(obj);
 
                     break;
                 case 1:
                     f=new prodShip();
+
+                    f.setArguments(obj);
                     break;
                 case 2:
                     f=new prodPhoto();
+                    f.setArguments(obj);
                     break;
                 case 3:
                    f=new prodSim();
+                   f.setArguments(obj);
                     break;
             }
             return f;
