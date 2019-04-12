@@ -110,6 +110,7 @@ public class prodInfo extends Fragment {
                     pr_title_sec=constructTitleSection(iobj,v,pro);
                     pr_price_sec=constructPriceSection(iobj,v,pro);
                     pr_highlights_sec=constructHighlightSection(iobj,v,pro);
+                    pr_spec_sec=constructSpecificsSection(iobj,v,pro);
 
                     if(!(pr_images_sec||pr_title_sec||pr_price_sec||pr_highlights_sec|pr_spec_sec)){
                         TextView nores=v.findViewById(R.id.noresview);
@@ -140,6 +141,39 @@ public class prodInfo extends Fragment {
 
     }
 
+    private Boolean constructSpecificsSection(JSONObject iobj, View v, productRecyclerList pro) {
+
+        TextView specview=v.findViewById(R.id.specifictextview);
+
+        String specifics_string="";
+        if(!("default".equals(brand))){
+            specifics_string+="\u2022"+brand;
+        }
+
+        try {
+            JSONArray ispecifics=iobj.getJSONObject("Item").getJSONObject("ItemSpecifics").getJSONArray("NameValueList");
+            for(int i=0;i<ispecifics.length();i++){
+                if(!(ispecifics.getJSONObject(i).getString("Name").equals("Brand"))){
+                    specifics_string+="\n"+"\u2022"+ispecifics.getJSONObject(i).getJSONArray("Value").getString(0);
+
+                }
+
+            }
+            Log.i("Full text",specifics_string);
+            specview.setText(specifics_string);
+            Log.i("getetxt",specview.getText().toString());
+            return true;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            specview.setVisibility(View.GONE);
+            v.findViewById(R.id.linspeclayout).setVisibility(View.GONE);
+            return false;
+        }
+
+
+    }
+
     private Boolean constructHighlightSection(JSONObject iobj, View v, productRecyclerList pro) {
 
         TextView subtextvalue=v.findViewById(R.id.subtextviewvalue);
@@ -151,6 +185,7 @@ public class prodInfo extends Fragment {
         TableRow pricerow=v.findViewById(R.id.pricerow);
         TableRow brandrow=v.findViewById(R.id.brandrow);
         Boolean flagsubtitle,flagprice,flagbrand=false;
+
 
 
 

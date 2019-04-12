@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+
+    android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content">
+
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="vertical">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -92,36 +106,37 @@
         android:layout_alignBaseline="@id/prodprice"/>
 
     <LinearLayout
+        android:id="@+id/highlightslayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/highlightslayout"
-        android:layout_below="@id/prodprice">
+        android:layout_below="@id/prodprice"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
             android:id="@+id/highlighticon"
-            android:src="@drawable/information"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginTop="5dp"
-            android:padding="5dp"
-            />
+
+
+            android:src="@drawable/information" />
 
         <TextView
+            android:id="@+id/highlighttitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
             android:layout_marginTop="5dp"
 
-            android:padding="5dp"
-            android:id="@+id/highlighttitle"
-            android:text="Highlights"/>
+
+            android:text="Highlights"
+            android:textSize="16dp" />
 
     </LinearLayout>
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/highlightslayout"
         android:id="@+id/tabhighlight"
         >
@@ -201,8 +216,48 @@
 
     </TableLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/tabhighlight"
+        android:id="@+id/linspeclayout"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/specimage"
+            android:src="@drawable/wrench"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/speclabel"
+            android:text="Specification"
+            android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/specifictextview"
+        android:layout_below="@id/linspeclayout"
+        android:textSize="16dp"
+        android:text="ameya"
+        android:layout_marginStart="40dp"
+        />
+
+
+
 
 
 
 
 </RelativeLayout>
+
+</LinearLayout>
+
+</ScrollView>
