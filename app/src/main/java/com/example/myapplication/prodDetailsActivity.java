@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -48,6 +49,7 @@ public class prodDetailsActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
     String nodeRequestUrl;
+    productRecyclerList obj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,45 +80,46 @@ public class prodDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        productRecyclerList obj=getIntent().getExtras().getParcelable("firstData");
+        obj=getIntent().getExtras().getParcelable("firstData");
         Log.i("Data from first:",""+obj.getTitle());
 
 
         nodeRequestUrl="http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/itemDetailsCall/"+obj.getItem_id();
-        callItemDetails(nodeRequestUrl);
+        //callItemDetails(nodeRequestUrl);
 
 
 
-
-    }
-
-    private void callItemDetails(String nodeRequestUrl) {
-
-        StringRequest request=new StringRequest(Request.Method.GET, nodeRequestUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                try {
-                    JSONObject job=new JSONObject(response);
-                    Log.i("hello","inhere");
-                    Log.i("Item details JSON:",job.toString());
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        RequestQueue rq= Volley.newRequestQueue(this);
-        rq.add(request);
 
 
     }
+
+//    private void callItemDetails(String nodeRequestUrl) {
+//
+//        StringRequest request=new StringRequest(Request.Method.GET, nodeRequestUrl, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//
+//                try {
+//                    JSONObject job=new JSONObject(response);
+//                    Log.i("hello","inhere");
+//                    Log.i("Item details JSON:",job.toString());
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        RequestQueue rq= Volley.newRequestQueue(this);
+//        rq.add(request);
+//
+//
+//    }
 
 
     //Logic to implement on back button
@@ -143,6 +146,8 @@ public class prodDetailsActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     /**
      * A placeholder fragment containing a simple view.
@@ -195,7 +200,11 @@ public class prodDetailsActivity extends AppCompatActivity {
             Fragment f=null;
             switch (position){
                 case 0:
-                    f=new prodInfo();
+                   f=new prodInfo();
+                    Bundle b=new Bundle();
+                    b.putString("nodeUrl",nodeRequestUrl);
+
+                    f.setArguments(b);
 
                     break;
                 case 1:
@@ -205,7 +214,7 @@ public class prodDetailsActivity extends AppCompatActivity {
                     f=new prodPhoto();
                     break;
                 case 3:
-                    f=new prodSim();
+                   f=new prodSim();
                     break;
             }
             return f;
