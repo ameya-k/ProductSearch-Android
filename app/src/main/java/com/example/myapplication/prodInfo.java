@@ -173,7 +173,7 @@ public class prodInfo extends Fragment {
             JSONArray ispecifics=iobj.getJSONObject("Item").getJSONObject("ItemSpecifics").getJSONArray("NameValueList");
             for(int i=0;i<ispecifics.length();i++){
                 if(!(ispecifics.getJSONObject(i).getString("Name").equals("Brand"))){
-                    specifics_string+="\n"+"\u2022"+ispecifics.getJSONObject(i).getJSONArray("Value").getString(0);
+                    specifics_string+="\n\n"+"\u2022"+ispecifics.getJSONObject(i).getJSONArray("Value").getString(0);
 
                 }
 

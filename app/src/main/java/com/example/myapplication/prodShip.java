@@ -70,6 +70,10 @@ public class prodShip extends Fragment {
 
         if(!(ship_sold||ship_info||ship_return)){
             //Set no results here
+            TextView nores=v.findViewById(R.id.noresshipview);
+            nores.setVisibility(View.VISIBLE);
+
+
 
         }
 

@@ -26,7 +26,15 @@
             app:title="@string/app_name">
 
 
-
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:gravity="right"
+                android:id="@+id/fbbtn"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/facebook"
+                />
 
 
         </android.support.v7.widget.Toolbar>
@@ -76,5 +84,8 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
+
+
+
 
 </android.support.design.widget.CoordinatorLayout>

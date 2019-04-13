@@ -5,7 +5,7 @@
     android:id="@+id/imagehorizview"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true"
-    android:layout_margin="5dp"
+    android:layout_margin="10dp"
     android:scaleType="fitXY"
 
     xmlns:android="http://schemas.android.com/apk/res/android" />

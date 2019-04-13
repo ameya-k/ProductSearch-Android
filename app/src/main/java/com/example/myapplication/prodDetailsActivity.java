@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -33,6 +34,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.net.URLEncoder;
 
 public class prodDetailsActivity extends AppCompatActivity implements prodInfo.OnMessageSendListener {
 
@@ -89,9 +92,20 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
         //Log.i("Data from first:",""+obj.getTitle());
         obj=getIntent().getExtras();
 
-        productRecyclerList tem=obj.getParcelable("firstData");
+        final productRecyclerList tem=obj.getParcelable("firstData");
         setSupportActionBar(tb);
         tb.setTitle(tem.getTitle());
+
+//        findViewById(R.id.fbbtn).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String url="https://www.facebook.com/dialog/share?app_id= 1028804487317941&display=popup"+"&quote="+"Buy "+ URLEncoder.encode(tem.getTitle());
+//                url+=" at $"+tem.getProduct_price()+"&href=";
+//                Uri uri = Uri.parse(url);
+//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(intent);
+//            }
+//        });
 
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
