@@ -34,6 +34,7 @@
             android:ellipsize="end"
             android:maxLines="3"
             android:minLines="3"
+
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:textSize="16dp"

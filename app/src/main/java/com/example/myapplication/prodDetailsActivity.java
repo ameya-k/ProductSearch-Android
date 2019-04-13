@@ -4,6 +4,8 @@ import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -32,7 +34,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class prodDetailsActivity extends AppCompatActivity {
+public class prodDetailsActivity extends AppCompatActivity implements prodInfo.OnMessageSendListener {
 
     Toolbar tb;
     /**
@@ -158,6 +160,17 @@ public class prodDetailsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onMessageSend(String message) {
+
+          ViewPager pager=findViewById(R.id.container);
+        FragmentPagerAdapter adp=(FragmentPagerAdapter)pager.getAdapter();
+          prodShip shipfragment=(prodShip)adp.instantiateItem(pager,1);
+          shipfragment.setItemData(message);
+
+
+          Log.i("Data in Activity",message);
+    }
 
 
     /**

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -43,6 +44,14 @@ public class prodInfo extends Fragment {
     Boolean pr_images_sec,pr_title_sec,pr_price_sec,pr_highlights_sec,pr_spec_sec;
     String brand="default";
     Boolean itemspecificspresent;
+
+    //Made changes here
+   OnMessageSendListener messageSendListener;
+    public interface OnMessageSendListener{
+
+        public void onMessageSend(String message);
+
+    }
 
 
     public prodInfo() {
@@ -93,6 +102,13 @@ public class prodInfo extends Fragment {
         return v;
     }
 
+//Made changes here
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        messageSendListener=(OnMessageSendListener) activity;
+    }
+
     private void callNodeItemDetails(final productRecyclerList pro, final View v) {
 
         String callURL="http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/itemDetailsCall/"+pro.getItem_id();
@@ -106,6 +122,9 @@ public class prodInfo extends Fragment {
                 JSONObject iobj= null;
                 try {
                     iobj = new JSONObject(response);
+
+                    //MAde changes here
+                    messageSendListener.onMessageSend(iobj.toString());
                     pr_images_sec=constructHorizontalView(iobj, v,pro);
                     pr_title_sec=constructTitleSection(iobj,v,pro);
                     pr_price_sec=constructPriceSection(iobj,v,pro);
