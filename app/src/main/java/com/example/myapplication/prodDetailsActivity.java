@@ -40,6 +40,7 @@ import java.net.URLEncoder;
 public class prodDetailsActivity extends AppCompatActivity implements prodInfo.OnMessageSendListener {
 
     Toolbar tb;
+    String fbhref;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -96,16 +97,16 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
         setSupportActionBar(tb);
         tb.setTitle(tem.getTitle());
 
-//        findViewById(R.id.fbbtn).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String url="https://www.facebook.com/dialog/share?app_id= 1028804487317941&display=popup"+"&quote="+"Buy "+ URLEncoder.encode(tem.getTitle());
-//                url+=" at $"+tem.getProduct_price()+"&href=";
-//                Uri uri = Uri.parse(url);
-//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//                startActivity(intent);
-//            }
-//        });
+        findViewById(R.id.fbbtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url="https://www.facebook.com/dialog/share?app_id= 1028804487317941&display=popup"+"&quote="+"Buy "+ URLEncoder.encode(tem.getTitle());
+                url+=" at "+tem.getProduct_price()+"&href="+fbhref+"&hashtag="+"#CSCI571Spring2019Ebay";
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
 
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -177,7 +178,14 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
     @Override
     public void onMessageSend(String message) {
 
-          ViewPager pager=findViewById(R.id.container);
+        try {
+            JSONObject job=new JSONObject(message);
+            fbhref=job.getJSONObject("Item").getString("ViewItemURLForNaturalSearch");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ViewPager pager=findViewById(R.id.container);
         FragmentPagerAdapter adp=(FragmentPagerAdapter)pager.getAdapter();
           prodShip shipfragment=(prodShip)adp.instantiateItem(pager,1);
           shipfragment.setItemData(message);
