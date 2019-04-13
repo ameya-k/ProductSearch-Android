@@ -4,17 +4,39 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class prodPhoto extends Fragment {
 
 
     productRecyclerList pro;
+    View v;
+
+    private RecyclerView photoRecyclerView;
+    private RecyclerView.Adapter photoAdapter;
+    String itemDetailsData;
+    private List<photoModel> photoItems;
 
     public prodPhoto() {
         // Required empty public constructor
@@ -49,9 +71,16 @@ public class prodPhoto extends Fragment {
         // Inflate the layout for this fragment
 
         pro=getArguments().getParcelable("firstData");
-        Log.i("title in photo",pro.getTitle());
+        Log.i("XXXXX","in oncreateview");
 
-        return inflater.inflate(R.layout.fragment_prod_photo, container, false);
+        v=inflater.inflate(R.layout.fragment_prod_photo, container, false);
+
+
+        photoRecyclerView=v.findViewById(R.id.photoRecyclerView);
+
+
+
+        return v;
     }
 
 
@@ -64,6 +93,73 @@ public class prodPhoto extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+
+    }
+
+
+    public void setItemDetails(String dataFromActivity){
+        Log.i("XXXXX","in setItemdetails");
+
+        this.itemDetailsData=dataFromActivity;
+        Log.i("Item details-photo",itemDetailsData);
+
+
+        photoRecyclerView.setHasFixedSize(true);
+        photoRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        photoItems=new ArrayList<>();
+        loadRecyclerView(dataFromActivity);
+
+
+
+    }
+
+    private void loadRecyclerView(String dataFromACtivity) {
+        String title="";
+        try {
+            JSONObject objFromActivity=new JSONObject(dataFromACtivity);
+            title=objFromActivity.getJSONObject("Item").getString("Title");
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String googleUrl="http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/googleCall/"+ URLEncoder.encode(title);
+        StringRequest request=new StringRequest(Request.Method.GET, googleUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject photoresult=new JSONObject(response);
+                    JSONArray items=photoresult.getJSONArray("items");
+
+                    for(int i=0;i<items.length();i++){
+                        String url=items.getJSONObject(i).getString("link");
+                        photoModel model=new photoModel(url);
+                        photoItems.add(model);
+                    }
+
+                    photoAdapter=new photoAdapter(photoItems,getContext());
+                    photoRecyclerView.setAdapter(photoAdapter);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        RequestQueue rq= Volley.newRequestQueue(getContext());
+        rq.add(request);
+
 
     }
 

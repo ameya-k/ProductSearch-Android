@@ -8,12 +8,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 
 public class prodSim extends Fragment {
 
 productRecyclerList pro;
+View v;
+
+Spinner sortOrderSpinner,sortTypeSpinner;
 
     public prodSim() {
         // Required empty public constructor
@@ -49,10 +53,32 @@ productRecyclerList pro;
 
         pro=getArguments().getParcelable("firstData");
         Log.i("title in sim:",pro.getTitle());
+        v=inflater.inflate(R.layout.fragment_prod_sim, container, false);
+        populateSpinners(v,pro);
 
-        return inflater.inflate(R.layout.fragment_prod_sim, container, false);
+
+
+        return v;
     }
 
+    private void populateSpinners(View v, productRecyclerList pro) {
+       sortTypeSpinner=v.findViewById(R.id.sortTypeSpinner);
+       sortOrderSpinner=v.findViewById(R.id.sortOrderSpinner);
+//        ArrayAdapter<CharSequence> adp=ArrayAdapter.createFromResource(this.getActivity(),R.array.categoryArray,android.R.layout.simple_spinner_item);
+//        adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spn.setAdapter(adp);
+
+        ArrayAdapter<CharSequence> adp=ArrayAdapter.createFromResource(getActivity(),R.array.sortTypeArray,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> sortOrderAdp=ArrayAdapter.createFromResource(getActivity(),R.array.sortOrder,android.R.layout.simple_spinner_item);
+        adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortOrderAdp.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        sortTypeSpinner.setAdapter(adp);
+        sortOrderSpinner.setAdapter(sortOrderAdp);
+        sortTypeSpinner.setSelection(0);
+        sortOrderSpinner.setSelection(0);
+
+
+    }
 
 
     @Override

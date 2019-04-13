@@ -36,6 +36,20 @@
             Video Games &amp; Consoles
         </item>
     </string-array>
+
+    <string-array name="sortTypeArray">
+        <item>Default</item>
+        <item>Name</item>
+        <item>Price</item>
+        <item>Days</item>
+
+    </string-array>
+
+    <string-array name="sortOrder">
+        <item>Ascending</item>
+        <item>Descending</item>
+    </string-array>
+
     <string name="title_activity_product_details">ProductDetailsActivity</string>
     <string name="title_activity_prod_details">prodDetailsActivity</string>
     <string name="tab_text_3">Tab 3</string>

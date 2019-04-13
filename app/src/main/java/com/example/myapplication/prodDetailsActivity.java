@@ -71,6 +71,9 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        mViewPager.setOffscreenPageLimit(3);
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -101,7 +104,7 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
             @Override
             public void onClick(View v) {
                 String url="https://www.facebook.com/dialog/share?app_id= 1028804487317941&display=popup"+"&quote="+"Buy "+ URLEncoder.encode(tem.getTitle());
-                url+=" at "+tem.getProduct_price()+"&href="+fbhref+"&hashtag="+"#CSCI571Spring2019Ebay";
+                url+=" at "+tem.getProduct_price()+"&href="+fbhref+"&hashtag=%23CSCI571Spring2019Ebay";
                 Uri uri = Uri.parse(url);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
@@ -190,6 +193,14 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
           prodShip shipfragment=(prodShip)adp.instantiateItem(pager,1);
           shipfragment.setItemData(message);
 
+        Log.i("XXXXX","pre");
+
+        FragmentPagerAdapter photadp=(FragmentPagerAdapter)pager.getAdapter();
+        prodPhoto photofragment=(prodPhoto)photadp.instantiateItem(pager,2);
+        photofragment.setItemDetails(message);
+
+
+        Log.i("XXXXX","post");
 
           Log.i("Data in Activity",message);
     }
