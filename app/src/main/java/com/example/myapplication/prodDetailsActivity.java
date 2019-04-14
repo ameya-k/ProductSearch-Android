@@ -74,7 +74,14 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
 
         mViewPager.setOffscreenPageLimit(3);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.getTabAt(0).setIcon(R.drawable.pinfoicon);
+        tabLayout.getTabAt(1).setIcon(R.drawable.shipunselect);
+        tabLayout.getTabAt(2).setIcon(R.drawable.googleunslected);
+        tabLayout.getTabAt(3).setIcon(R.drawable.simunselect);
+
+
+
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -86,7 +93,49 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
             }
         });
         tb=findViewById(R.id.toolbarProduct);
+        tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager){
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getPosition()==0){
+                    tabLayout.getTabAt(0).setIcon(R.drawable.pinfoicon);
+                }
+                if(tab.getPosition()==1){
+                    tabLayout.getTabAt(1).setIcon(R.drawable.shiptabicon);
+                }
+                if(tab.getPosition()==2){
+                    tabLayout.getTabAt(2).setIcon(R.drawable.gicon);
 
+                }
+                if(tab.getPosition()==3){
+                    tabLayout.getTabAt(3).setIcon(R.drawable.simicon);
+                }
+
+                super.onTabSelected(tab);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                super.onTabUnselected(tab);
+                if(tab.getPosition()==0){
+                        tabLayout.getTabAt(0).setIcon(R.drawable.infounselect);
+                }
+                if(tab.getPosition()==1){
+                        tabLayout.getTabAt(1).setIcon(R.drawable.shipunselect);
+                }
+                if(tab.getPosition()==2){
+                        tabLayout.getTabAt(2).setIcon(R.drawable.googleunslected);
+
+                }
+                if(tab.getPosition()==3){
+                        tabLayout.getTabAt(3).setIcon(R.drawable.simunselect);
+                }
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                super.onTabReselected(tab);
+            }
+        });
 
 
 
