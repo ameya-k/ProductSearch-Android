@@ -9,6 +9,7 @@ public class simItemModel {
     String image_link;
 
 
+
     public simItemModel(String prod_title, String shipping_cost, String days_left, String price, String image_link) {
         this.prod_title = prod_title;
         this.shipping_cost = shipping_cost;

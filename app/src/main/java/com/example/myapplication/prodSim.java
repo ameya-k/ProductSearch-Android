@@ -199,7 +199,15 @@ private List<simItemModel> displayItemsList;
                             String dleft=oneItem.getString("timeLeft");
                             int index=dleft.indexOf('D');
 
-                            prdaysleft=dleft.substring(1,index-1);
+                            prdaysleft=dleft.substring(1,index);
+
+                            if("1".equals(prdaysleft)||"0".equals(prdaysleft)){
+                                prdaysleft=prdaysleft+" day left";
+
+                            }
+                            else{
+                                prdaysleft=prdaysleft+" days left";
+                            }
 
 
 
