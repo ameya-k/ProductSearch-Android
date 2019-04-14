@@ -36,7 +36,7 @@ public class simItemAdapter extends RecyclerView.Adapter<simItemAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-            simItemModel specCard=simItemsList.get(i);
+            final simItemModel specCard=simItemsList.get(i);
 
             viewHolder.simtitle.setText(specCard.getProd_title());
             viewHolder.simShipping.setText(specCard.getShipping_cost());
@@ -54,7 +54,10 @@ public class simItemAdapter extends RecyclerView.Adapter<simItemAdapter.ViewHold
 //                    Uri uri = Uri.parse(url);
 //                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 //                    startActivity(intent);
-
+                      String url=specCard.getRedirect_url();
+                      Uri redirection=Uri.parse(url);
+                      Intent i=new Intent(Intent.ACTION_VIEW,redirection);
+                      con.startActivity(i);
 
                 }
             });

@@ -153,6 +153,7 @@ private List<simItemModel> displayItemsList;
                         String prshipping="";
                         String prdaysleft="";
                         String prprice="";
+                        String redUrl="";
 
                         JSONObject oneItem= null;
                         try {
@@ -225,8 +226,15 @@ private List<simItemModel> displayItemsList;
                             prprice="N/A";
                         }
 
+                        try {
+                            redUrl=oneItem.getString("viewItemURL");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            redUrl="N/A";
+                        }
 
-                        simItemModel newItem=new simItemModel(prtitle,prshipping,prdaysleft,prprice,imgurl);
+
+                        simItemModel newItem=new simItemModel(prtitle,prshipping,prdaysleft,prprice,imgurl,redUrl);
                         displayItemsList.add(newItem);
                     }
 
