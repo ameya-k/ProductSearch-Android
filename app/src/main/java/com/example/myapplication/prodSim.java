@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -25,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -39,8 +41,9 @@ View v;
 Spinner sortOrderSpinner,sortTypeSpinner;
 
 private RecyclerView simrecycler;
-private RecyclerView.Adapter recyclerAdapter;
+private simItemAdapter recyclerAdapter;
 private List<simItemModel> displayItemsList;
+private List<simItemModel> copyList;
 
 
     public prodSim() {
@@ -84,7 +87,9 @@ private List<simItemModel> displayItemsList;
         simrecycler.setHasFixedSize(true);
         simrecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         displayItemsList=new ArrayList<>();
+        copyList=new ArrayList<>();
 
+        recyclerAdapter=new simItemAdapter(displayItemsList,getContext());
 
         createSimItemsRecyclerView();
 
@@ -238,13 +243,14 @@ private List<simItemModel> displayItemsList;
                         displayItemsList.add(newItem);
                     }
 
-                    recyclerAdapter=new simItemAdapter(displayItemsList,getContext());
+//                    recyclerAdapter=new simItemAdapter(displayItemsList,getContext());
                     simrecycler.setAdapter(recyclerAdapter);
 
-
+recyclerAdapter.setSimItemsList(displayItemsList);
 
 
                 }
+                copyList.addAll(displayItemsList);
 
 
 
@@ -276,7 +282,181 @@ private List<simItemModel> displayItemsList;
         sortOrderSpinner.setAdapter(sortOrderAdp);
         sortTypeSpinner.setSelection(0);
         sortOrderSpinner.setSelection(0);
+        sortOrderSpinner.setEnabled(false);
 
+
+        sortTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(position!=0){
+                    sortOrderSpinner.setEnabled(true);
+                }
+                if(position==0){
+                    sortOrderSpinner.setEnabled(false);
+                    //deep copy
+                    recyclerAdapter.setSimItemsList(copyList);
+                }
+                else if(position==1){
+                    sortByName();
+                    if(sortOrderSpinner.getSelectedItemPosition()==1){
+                        Collections.reverse(displayItemsList);
+                    }
+                    recyclerAdapter.setSimItemsList(displayItemsList);
+                }
+                else if(position==2){
+                    sortByPrice();
+                    if(sortOrderSpinner.getSelectedItemPosition()==1){
+                        Collections.reverse(displayItemsList);
+                    }
+                    recyclerAdapter.setSimItemsList(displayItemsList);
+                }
+                else if(position==3){
+                    sortByDaysLeft();
+                    if(sortOrderSpinner.getSelectedItemPosition()==1){
+                        Collections.reverse(displayItemsList);
+                    }
+                    recyclerAdapter.setSimItemsList(displayItemsList);
+                }
+                recyclerAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        sortOrderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(sortTypeSpinner.getSelectedItemPosition()==0){
+
+                    //deep copy
+                    recyclerAdapter.setSimItemsList(copyList);
+
+                }
+                else if(sortTypeSpinner.getSelectedItemPosition()==1){
+                    sortByName();
+                    if(position==1){
+                        Collections.reverse(displayItemsList);
+                    }
+                    recyclerAdapter.setSimItemsList(displayItemsList);
+
+
+                }
+                else if(sortTypeSpinner.getSelectedItemPosition()==2){
+                    sortByPrice();
+                    if(position==1){
+                        Collections.reverse(displayItemsList);
+                    }
+                    recyclerAdapter.setSimItemsList(displayItemsList);
+
+                }
+                else{
+                    sortByDaysLeft();
+                    if(position==1){
+                        Collections.reverse(displayItemsList);
+                    }
+                    recyclerAdapter.setSimItemsList(displayItemsList);
+                }
+                recyclerAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+    }
+
+    private void sortByPrice() {
+
+        Collections.sort(displayItemsList,(item1,item2)->{
+
+            String s1=item1.getPrice();
+            String s2=item2.getPrice();
+            if(!("N/A".equals(s1))){
+                s1=s1.substring(1);
+            }
+            else{
+                s1="0";
+            }
+            if(!("N/A".equals(s2))){
+                s2=s2.substring(1);
+            }
+            else{
+                s2="0";
+            }
+
+
+            if(Float.parseFloat(s1)>Float.parseFloat(s2)){
+                return 1;
+            }
+            else if(Float.parseFloat(s1)<Float.parseFloat(s2)){
+                return -1;
+            }
+            else{
+                return 0;
+            }
+
+
+
+        });
+
+
+    }
+
+    private void sortByName() {
+
+
+        Collections.sort(displayItemsList,(item1,item2)->item1.getProd_title().compareTo(item2.getProd_title()));
+
+    }
+
+    private void sortByDaysLeft(){
+
+
+        Collections.sort(displayItemsList,(item1,item2)->{
+
+            String s1=item1.getDays_left();
+            String s2=item2.getDays_left();
+
+            if(!(("N/A").equals(s1))){
+                int index=s1.indexOf('d');
+                s1=s1.substring(0,index).trim();
+            }
+            else {
+                s1="0";
+            }
+
+            if(!(("N/A").equals(s2))){
+                int index=s2.indexOf('d');
+                s2=s2.substring(0,index).trim();
+            }
+            else {
+                s2="0";
+            }
+
+            if(Integer.parseInt(s1)>Integer.parseInt(s2)){
+                return 1;
+            }
+            else if(Integer.parseInt(s1)<Integer.parseInt(s2)){
+                return -1;
+            }
+            else{
+                return 0;
+            }
+
+
+
+        });
 
     }
 

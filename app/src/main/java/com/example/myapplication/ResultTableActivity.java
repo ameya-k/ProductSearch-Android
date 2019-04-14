@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -135,7 +137,10 @@ public class ResultTableActivity extends AppCompatActivity {
             JSONObject jb=resArray.getJSONObject(0);
             size=resArray.length();
             TextView reshead=findViewById(R.id.resultCountText);
-            reshead.setText("Showing "+size+ " results for "+prodTitle);
+            String text="Showing "+size+ " results for "+prodTitle;
+
+            reshead.setText(text);
+            
             Log.i("demo json",""+jb.getJSONArray("title").get(0).toString());
 
 

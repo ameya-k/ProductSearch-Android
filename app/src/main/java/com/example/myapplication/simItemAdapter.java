@@ -91,4 +91,12 @@ public class simItemAdapter extends RecyclerView.Adapter<simItemAdapter.ViewHold
             cardcontainer=itemView.findViewById(R.id.simcardlayout);
         }
     }
+
+    public List<simItemModel> getSimItemsList() {
+        return simItemsList;
+    }
+
+    public void setSimItemsList(List<simItemModel> simItemsList) {
+        this.simItemsList = simItemsList;
+    }
 }
