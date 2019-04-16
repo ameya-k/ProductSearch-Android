@@ -22,7 +22,7 @@
         <activity
             android:name=".MainActivity"
             android:label="Product Search"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

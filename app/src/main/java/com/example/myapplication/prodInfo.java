@@ -165,22 +165,24 @@ public class prodInfo extends Fragment {
         TextView specview=v.findViewById(R.id.specifictextview);
 
         String specifics_string="";
+        specview.setText("");
         if(!("default".equals(brand))){
             specifics_string+="\u2022"+brand;
         }
 
         try {
             JSONArray ispecifics=iobj.getJSONObject("Item").getJSONObject("ItemSpecifics").getJSONArray("NameValueList");
+
             for(int i=0;i<ispecifics.length();i++){
                 if(!(ispecifics.getJSONObject(i).getString("Name").equals("Brand"))){
-                    specifics_string+="\n\n"+"\u2022"+ispecifics.getJSONObject(i).getJSONArray("Value").getString(0);
+                    specifics_string+="\u2022"+ispecifics.getJSONObject(i).getJSONArray("Value").get(0)+"\n\n";
 
                 }
 
             }
             Log.i("Full text",specifics_string);
             specview.setText(specifics_string);
-            Log.i("getetxt",specview.getText().toString());
+            Log.i("xxxxx",specview.getText().toString());
             return true;
 
         } catch (JSONException e) {

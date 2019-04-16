@@ -240,7 +240,7 @@
         android:layout_below="@id/tabhighlight"
         android:id="@+id/linspeclayout"
         android:layout_marginLeft="15dp"
-        android:layout_marginBottom="25dp"
+
         android:layout_marginTop="35dp">
 
         <ImageView
@@ -266,9 +266,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/specifictextview"
+
+
         android:layout_below="@id/linspeclayout"
         android:textSize="16dp"
-        android:text=""
         android:layout_marginStart="40dp"
         />
 
