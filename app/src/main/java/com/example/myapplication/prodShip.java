@@ -339,6 +339,7 @@ public class prodShip extends Fragment {
                    // Drawable d=getContext().getResources().getDrawable(R.drawable.star_circle);
                   //  d.setTint(feedback_star_color);
 
+
                     starimg.setImageResource(R.drawable.star_circle_outline);
                 }
                 else{
