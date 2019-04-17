@@ -346,6 +346,7 @@ public class prodShip extends Fragment {
                     starimg.setImageResource(R.drawable.star_circle);
                 }
 
+
                 flag_star=true;
 
 
