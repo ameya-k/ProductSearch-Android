@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -31,6 +32,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -63,6 +65,9 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prod_details);
+        obj=getIntent().getExtras();
+
+        final productRecyclerList tem=obj.getParcelable("firstData");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -85,13 +90,20 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+        //setting floating button on load
+
+        SharedPreferences sp=getSharedPreferences("WISHLIST_ITEMS",MODE_PRIVATE);
+
+        if(sp.getString(tem.getItem_id(),"N/A").equals("N/A")){
+            fab.setImageResource(R.drawable.addwishlist);
+        }
+        else{
+            fab.setImageResource(R.drawable.removewishlist);
+        }
+
+
+
         tb=findViewById(R.id.toolbarProduct);
         tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager){
             @Override
@@ -143,11 +155,37 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
 
        //obj=getIntent().getExtras().getParcelable("firstData");
         //Log.i("Data from first:",""+obj.getTitle());
-        obj=getIntent().getExtras();
 
-        final productRecyclerList tem=obj.getParcelable("firstData");
         setSupportActionBar(tb);
         tb.setTitle(tem.getTitle());
+
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               //Add to wishlist
+               if(sp.getString(tem.getItem_id(),"N/A").equals("N/A")){
+                   Gson g=new Gson();
+                   String json=g.toJson(tem);
+                   sp.edit().putString(tem.getItem_id(),json).commit();
+                   Log.i("XXAdded to wishlist",tem.getItem_id());
+                   Log.i("Wishlist:", String.valueOf(sp.getAll()));
+                   fab.setImageResource(R.drawable.removewishlist);
+
+               }
+               //Remove from wishlist
+               else{
+                fab.setImageResource(R.drawable.addwishlist);
+                sp.edit().remove(tem.getItem_id()).commit();
+                Log.i("XXRemoved item:",tem.getItem_id());
+                Log.i("wishlist", String.valueOf(sp.getAll()));
+               }
+
+
+            }
+        });
+
 
         findViewById(R.id.fbbtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,9 +201,7 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //nodeRequestUrl=" S
-        // "+obj.getItem_id();
-        //callItemDetails(nodeRequestUrl);
+
 
 
 
@@ -173,33 +209,7 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
 
     }
 
-//    private void callItemDetails(String nodeRequestUrl) {
-//
-//        StringRequest request=new StringRequest(Request.Method.GET, nodeRequestUrl, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//
-//                try {
-//                    JSONObject job=new JSONObject(response);
-//                    Log.i("hello","inhere");
-//                    Log.i("Item details JSON:",job.toString());
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//            }
-//        });
-//        RequestQueue rq= Volley.newRequestQueue(this);
-//        rq.add(request);
-//
-//
-//    }
+
 
 
     //Logic to implement on back button

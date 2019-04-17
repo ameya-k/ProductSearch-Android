@@ -2,15 +2,21 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -39,6 +45,9 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
 
     }
 
+
+
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
@@ -53,6 +62,17 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
         viewHolder.productCondition.setText(prlist.getProduct_condition());
         viewHolder.productShipping.setText(prlist.getProduct_shipping());
         viewHolder.productZip.setText(prlist.getProduct_zip());
+        SharedPreferences sp=con.getSharedPreferences("WISHLIST_ITEMS",Context.MODE_PRIVATE);
+        if(sp.getString(prlist.getItem_id(),"N/A").equals("N/A")){
+
+          // viewHolder.wishBtn.setBackground((Drawable)R.drawable.addwishlist);
+            viewHolder.wishBtn.setBackground(con.getResources().getDrawable(R.drawable.addwishlist));
+        }
+        else{
+            viewHolder.wishBtn.setBackground(con.getResources().getDrawable(R.drawable.removewishlist));
+        }
+
+
 
         viewHolder.lLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +80,43 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
                Intent i=new Intent(v.getContext(),prodDetailsActivity.class);
                i.putExtra("firstData",prlist);
                v.getContext().startActivity(i);
+            }
+        });
+
+
+        viewHolder.wishBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Log.i("Item Added to wishlist:", prlist.getItem_id());
+                SharedPreferences sp=v.getContext().getSharedPreferences("WISHLIST_ITEMS",Context.MODE_PRIVATE);
+
+                //remove from wishlist
+                if(!(sp.getString(prlist.getItem_id(),"N/A").equals("N/A"))){
+                    sp.edit().remove(prlist.getItem_id()).commit();
+                    viewHolder.wishBtn.setBackground(v.getContext().getDrawable(R.drawable.addwishlist));
+                    Log.i("Xx Removed item:",prlist.getItem_id());
+                    Log.i("XXpref listXX", String.valueOf(sp.getAll()));
+
+
+                }
+                else{
+                    Gson g=new Gson();
+                    String json=g.toJson(prlist);
+                    sp.edit().putString(prlist.getItem_id(),json).commit();
+
+                    viewHolder.wishBtn.setBackground(v.getContext().getDrawable(R.drawable.removewishlist));
+                    Log.i("XXAdded item:",prlist.getItem_id());
+                    Log.i("XXpref listXX", String.valueOf(sp.getAll()));
+                }
+
+                //add object to wishlist
+//                Gson g=new Gson();
+//                String json=g.toJson(prlist);
+//                sp.edit().putString(prlist.getItem_id(),json).commit();
+
+
+//                String j=sp.getString(prlist.getItem_id(),"n/a");
+//                Log.i("from shared preference:",j);
             }
         });
 
@@ -85,6 +142,7 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
         public TextView productCondition;
         public TextView productPrice;
         public LinearLayout lLayout;
+        public Button wishBtn;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -97,6 +155,7 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
             productCondition=itemView.findViewById(R.id.productConditionView);
             productPrice=itemView.findViewById(R.id.productPriceView);
             lLayout=itemView.findViewById(R.id.cardLinear);
+            wishBtn=itemView.findViewById(R.id.wishbtn);
 
         }
     }

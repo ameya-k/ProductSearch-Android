@@ -17,6 +17,11 @@ import java.util.List;
 public class wishAdapter extends RecyclerView.Adapter<wishAdapter.ViewHolder> {
 
     private List<wishModel> wishlist;
+
+    public void setWishlist(List<wishModel> wishlist) {
+        this.wishlist = wishlist;
+    }
+
     private Context con;
 
     public wishAdapter(List<wishModel> wishlist, Context con) {

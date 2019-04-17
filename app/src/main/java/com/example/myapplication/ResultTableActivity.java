@@ -46,6 +46,17 @@ public class ResultTableActivity extends AppCompatActivity {
     String prodTitle;
     ProgressBar pb;
     TextView tv;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(adapter!=null){
+            adapter.notifyDataSetChanged();
+            productRecyclerView.setAdapter(adapter);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -59,6 +70,7 @@ public class ResultTableActivity extends AppCompatActivity {
         tv=findViewById(R.id.showProductsText);
         pb.setVisibility(View.VISIBLE);
         pb.setVisibility(View.VISIBLE);
+
 
 
         Intent intent=getIntent();

@@ -246,7 +246,7 @@ private List<simItemModel> copyList;
 //                    recyclerAdapter=new simItemAdapter(displayItemsList,getContext());
                     simrecycler.setAdapter(recyclerAdapter);
 
-recyclerAdapter.setSimItemsList(displayItemsList);
+                    recyclerAdapter.setSimItemsList(displayItemsList);
 
 
                 }

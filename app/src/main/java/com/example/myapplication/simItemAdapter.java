@@ -49,11 +49,6 @@ public class simItemAdapter extends RecyclerView.Adapter<simItemAdapter.ViewHold
             viewHolder.cardcontainer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    String url="https://www.facebook.com/dialog/share?app_id= 1028804487317941&display=popup"+"&quote="+"Buy "+ URLEncoder.encode(tem.getTitle());
-//                    url+=" at "+tem.getProduct_price()+"&href="+fbhref+"&hashtag=%23CSCI571Spring2019Ebay";
-//                    Uri uri = Uri.parse(url);
-//                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//                    startActivity(intent);
                       String url=specCard.getRedirect_url();
                       Uri redirection=Uri.parse(url);
                       Intent i=new Intent(Intent.ACTION_VIEW,redirection);
