@@ -11,6 +11,7 @@ public class wishModel {
     private String wish_product_price;
     private String wish_item_id;
 
+
     public wishModel(String wish_image_url, String wish_title, String wish_product_zip, String wish_product_shipping, String wish_product_condition, String wish_product_price, String wish_item_id) {
         this.wish_image_url = wish_image_url;
         this.wish_title = wish_title;
@@ -48,5 +49,18 @@ public class wishModel {
 
     public String getWish_item_id() {
         return wish_item_id;
+    }
+
+    @Override
+    public String toString() {
+        return "wishModel{" +
+                "wish_image_url='" + wish_image_url + '\'' +
+                ", wish_title='" + wish_title + '\'' +
+                ", wish_product_zip='" + wish_product_zip + '\'' +
+                ", wish_product_shipping='" + wish_product_shipping + '\'' +
+                ", wish_product_condition='" + wish_product_condition + '\'' +
+                ", wish_product_price='" + wish_product_price + '\'' +
+                ", wish_item_id='" + wish_item_id + '\'' +
+                '}';
     }
 }

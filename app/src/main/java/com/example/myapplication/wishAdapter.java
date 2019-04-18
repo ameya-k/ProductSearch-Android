@@ -1,30 +1,42 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class wishAdapter extends RecyclerView.Adapter<wishAdapter.ViewHolder> {
 
-    private List<wishModel> wishlist;
+    private List<productRecyclerList> wishlist;
+    Gson gson;
 
-    public void setWishlist(List<wishModel> wishlist) {
+    public void setWishlist(List<productRecyclerList> wishlist) {
         this.wishlist = wishlist;
+    }
+
+    public List<productRecyclerList> getWishlist() {
+        return wishlist;
     }
 
     private Context con;
 
-    public wishAdapter(List<wishModel> wishlist, Context con) {
+    public wishAdapter(List<productRecyclerList> wishlist, Context con) {
         this.wishlist = wishlist;
         this.con = con;
     }
@@ -38,15 +50,35 @@ public class wishAdapter extends RecyclerView.Adapter<wishAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+//
+        final productRecyclerList prlist=wishlist.get(i);
 
-        final wishModel prlist=wishlist.get(i);
 
-        Picasso.with(con).load(prlist.getWish_image_url()).into(viewHolder.wishproductImage);
-        viewHolder.wishproductTitle.setText(prlist.getWish_title());
-        viewHolder.wishproductPrice.setText(prlist.getWish_product_price());
-        viewHolder.wishproductCondition.setText(prlist.getWish_product_condition());
-        viewHolder.wishproductShipping.setText(prlist.getWish_product_shipping());
-        viewHolder.wishproductZip.setText(prlist.getWish_product_zip());
+        Picasso.with(con).load(prlist.getImage_url()).into(viewHolder.wishproductImage);
+        viewHolder.wishproductTitle.setText(prlist.getTitle());
+        viewHolder.wishproductPrice.setText(prlist.getProduct_price());
+        viewHolder.wishproductCondition.setText(prlist.getProduct_condition());
+        viewHolder.wishproductShipping.setText(prlist.getProduct_shipping());
+        viewHolder.wishproductZip.setText(prlist.getProduct_zip());
+
+        SharedPreferences sp=con.getSharedPreferences("WISHLIST_ITEMS",Context.MODE_PRIVATE);
+
+            viewHolder.wishBtnThis.setBackground(con.getResources().getDrawable(R.drawable.removewishlist));
+
+
+            viewHolder.wishBtnThis.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Log.v("abc","clciked");
+
+                    sp.edit().remove(prlist.getItem_id()).commit();
+
+
+                }
+            });
+
+
 
 
     }
@@ -66,6 +98,7 @@ public class wishAdapter extends RecyclerView.Adapter<wishAdapter.ViewHolder> {
         public TextView wishproductCondition;
         public TextView wishproductPrice;
         public LinearLayout wishlLayout;
+        public Button wishBtnThis;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +110,7 @@ public class wishAdapter extends RecyclerView.Adapter<wishAdapter.ViewHolder> {
             wishproductCondition=itemView.findViewById(R.id.wishProductConditionTextView);
             wishproductPrice=itemView.findViewById(R.id.wishProductPriceTextView);
             wishlLayout=itemView.findViewById(R.id.wishlistContainer);
+            wishBtnThis=itemView.findViewById(R.id.wishbtn_wishlist);
 
 
         }

@@ -24,7 +24,18 @@ public class productRecyclerList implements Parcelable {
         this.item_id=item_id;
     }
 
-
+    @Override
+    public String toString() {
+        return "productRecyclerList{" +
+                "image_url='" + image_url + '\'' +
+                ", title='" + title + '\'' +
+                ", product_zip='" + product_zip + '\'' +
+                ", product_shipping='" + product_shipping + '\'' +
+                ", product_condition='" + product_condition + '\'' +
+                ", product_price='" + product_price + '\'' +
+                ", item_id='" + item_id + '\'' +
+                '}';
+    }
 
     public String getItem_id() {
         return item_id;
