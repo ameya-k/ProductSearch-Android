@@ -2,16 +2,22 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.Group;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -29,10 +35,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class searchForm extends Fragment {
@@ -41,7 +50,7 @@ public class searchForm extends Fragment {
     Button searchBtn;
     EditText keyword;
     RadioButton zipBtn;
-    EditText zipText;
+    AutoCompleteTextView zipText;
     TextView kerror;
     TextView zerror;
     boolean zipFault;
@@ -58,8 +67,13 @@ public class searchForm extends Fragment {
     CheckBox nbox;
     EditText mileT;
     RadioButton curBtn;
+    TextView selectedText;
     HashMap<String,String> categMap;
     RadioGroup rg;
+    private static final int TRIGGER_AUTO_COMPLETE = 100;
+    private static final long AUTO_COMPLETE_DELAY = 300;
+    private Handler handler;
+    private ZipSuggestAdapter autoSuggestAdapter;
 
 
 
@@ -75,6 +89,7 @@ public class searchForm extends Fragment {
         keyword=(EditText)v.findViewById(R.id.kword);
         zipBtn=v.findViewById(R.id.zip_loc);
         zipText=v.findViewById(R.id.zipcode);
+        selectedText=v.findViewById(R.id.selected_item);
         kerror=v.findViewById(R.id.kworderror);
         zerror=v.findViewById(R.id.ziperror);
         zerror.setVisibility(View.INVISIBLE);
@@ -91,6 +106,10 @@ public class searchForm extends Fragment {
         mileT=v.findViewById(R.id.miles);
         curBtn=v.findViewById(R.id.current_loc);
         rg=v.findViewById(R.id.radioGroup);
+
+
+
+
 
 
         StringRequest iprequest=new StringRequest(Request.Method.GET, "http://ip-api.com/json", new Response.Listener<String>() {
@@ -135,6 +154,54 @@ public class searchForm extends Fragment {
                 spinnerValue=categMap.get("All");
             }
         });
+
+        //Implementing zip auto complete call
+
+        autoSuggestAdapter = new ZipSuggestAdapter(getActivity(),
+                android.R.layout.simple_dropdown_item_1line);
+        zipText.setThreshold(1);
+        zipText.setAdapter(autoSuggestAdapter);
+        zipText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedText.setText(autoSuggestAdapter.getObject(position));
+            }
+        });
+
+       zipText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int
+                    count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                handler.removeMessages(TRIGGER_AUTO_COMPLETE);
+                handler.sendEmptyMessageDelayed(TRIGGER_AUTO_COMPLETE,
+                        AUTO_COMPLETE_DELAY);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                if (msg.what == TRIGGER_AUTO_COMPLETE) {
+                    if (!TextUtils.isEmpty(zipText.getText())) {
+                        makeApiCall(zipText.getText().toString());
+                    }
+                }
+                return false;
+            }
+        });
+
+
 
 
 
@@ -208,6 +275,37 @@ public class searchForm extends Fragment {
 
 
         return v;
+
+    }
+
+    private void makeApiCall(String text) {
+
+        zipAutoCall.make(getActivity(), text, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                List<String> stringList = new ArrayList<>();
+                try {
+                    JSONObject responseObject = new JSONObject(response);
+                    JSONArray array = responseObject.getJSONArray("postalCodes");
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject row = array.getJSONObject(i);
+                        stringList.add(row.getString("postalCode"));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                autoSuggestAdapter.setData(stringList);
+                autoSuggestAdapter.notifyDataSetChanged();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
 
     }
 
