@@ -83,6 +83,8 @@ public class ResultTableActivity extends AppCompatActivity {
         //spinwheel.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
+
+
         //Starting the recycler view process here
         productRecyclerView=findViewById(R.id.productrecyclerview);
         productRecyclerView.setHasFixedSize(true);
@@ -137,7 +139,8 @@ public class ResultTableActivity extends AppCompatActivity {
     //Logic to implement on back button
     @Override
     public boolean onSupportNavigateUp(){
-        Toast.makeText(getApplicationContext(),"hello",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(),"hello",Toast.LENGTH_SHORT).show();
+        super.onBackPressed();
         return true;
     }
 
