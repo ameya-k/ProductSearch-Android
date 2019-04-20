@@ -405,8 +405,7 @@ public class searchForm extends Fragment {
             kFault=false;
         }
 
-        if(nbox.isChecked() &&zipBtn.isChecked()&& (zipText.getText().toString()==""||zipText.getText().toString().trim().length()==0)
-                ||!(match.matches())){
+        if(nbox.isChecked() &&zipBtn.isChecked()&& (zipText.getText().toString()==""||zipText.getText().toString().trim().length()==0||!match.matches())){
             zerror.setVisibility(View.VISIBLE);
             zipFault=true;
 

@@ -46,6 +46,7 @@ public class ResultTableActivity extends AppCompatActivity {
     String prodTitle;
     ProgressBar pb;
     TextView tv;
+    TextView npview;
 
     @Override
     protected void onResume() {
@@ -71,7 +72,7 @@ public class ResultTableActivity extends AppCompatActivity {
         pb.setVisibility(View.VISIBLE);
         pb.setVisibility(View.VISIBLE);
 
-
+        npview=findViewById(R.id.noproductsview);
 
         Intent intent=getIntent();
         final ProgressDialog spinwheel=new ProgressDialog(this);
@@ -148,6 +149,9 @@ public class ResultTableActivity extends AppCompatActivity {
                     getJSONArray("searchResult").getJSONObject(0).getJSONArray("item");
             JSONObject jb=resArray.getJSONObject(0);
             size=resArray.length();
+            if(size==0){
+                npview.setVisibility(View.VISIBLE);
+            }
             TextView reshead=findViewById(R.id.resultCountText);
             String text="Showing "+size+ " results for "+prodTitle;
 
@@ -222,6 +226,7 @@ public class ResultTableActivity extends AppCompatActivity {
 
         } catch (JSONException e) {
             e.printStackTrace();
+            npview.setVisibility(View.VISIBLE);
         }
 
     }
