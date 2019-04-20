@@ -223,6 +223,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:ems="10"
+            android:enabled="false"
             android:hint="zipcode"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
@@ -237,6 +238,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/zipcode"
             android:layout_marginTop="50dp"
+            android:visibility="gone"
             android:padding="20dp"/>
 
         <TextView

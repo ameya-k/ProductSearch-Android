@@ -42,6 +42,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class searchForm extends Fragment {
@@ -107,6 +109,24 @@ public class searchForm extends Fragment {
         curBtn=v.findViewById(R.id.current_loc);
         rg=v.findViewById(R.id.radioGroup);
 
+
+        zipBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                zipText.setEnabled(true);
+
+
+            }
+        });
+
+
+        curBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                zipText.setEnabled(false);
+            }
+        });
 
 
 
@@ -370,6 +390,10 @@ public class searchForm extends Fragment {
 //        EditText keyword=v.findViewById(R.id.kword);
 //        RadioButton zipBtn=v.findViewById(R.id.zip_loc);
 //        EditText zipText=v.findViewById(R.id.zipcode);
+        String expression="^[0-9]{5}(?:-[0-9]{4})?$";
+        Pattern zipPattern=Pattern.compile(expression);
+        Matcher match=zipPattern.matcher(zipText.getText().toString());
+
         if(keyword.getText().toString()==""||keyword.getText().toString().trim().length()==0){
             kFault=true;
             kerror.setVisibility(View.VISIBLE);
@@ -381,7 +405,8 @@ public class searchForm extends Fragment {
             kFault=false;
         }
 
-        if(nbox.isChecked() &&zipBtn.isChecked()&& (zipText.getText().toString()==""||zipText.getText().toString().trim().length()==0) ){
+        if(nbox.isChecked() &&zipBtn.isChecked()&& (zipText.getText().toString()==""||zipText.getText().toString().trim().length()==0)
+                ||!(match.matches())){
             zerror.setVisibility(View.VISIBLE);
             zipFault=true;
 
