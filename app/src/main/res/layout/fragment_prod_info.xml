@@ -4,6 +4,7 @@
     android:layout_width="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#f1f0f0">
 
 
@@ -53,6 +54,13 @@
         android:visibility="gone"/>
 
     <!--make wrap content-->
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/toplayout">
+
     <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -297,7 +305,7 @@
 
         />
 
-
+</RelativeLayout>
 
 </RelativeLayout>
 

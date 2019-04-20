@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.constraint.Group;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -44,7 +46,7 @@ public class prodInfo extends Fragment {
     Boolean pr_images_sec,pr_title_sec,pr_price_sec,pr_highlights_sec,pr_spec_sec;
     String brand="default";
     Boolean itemspecificspresent;
-
+    RelativeLayout toplayout;
     //Made changes here
    OnMessageSendListener messageSendListener;
     public interface OnMessageSendListener{
@@ -93,6 +95,9 @@ public class prodInfo extends Fragment {
         spinbar.setVisibility(View.VISIBLE);
         showprodview.setVisibility(View.VISIBLE);
         linflater=LayoutInflater.from(getActivity());
+        toplayout=v.findViewById(R.id.toplayout);
+        toplayout.setVisibility(View.INVISIBLE);
+        //hidgroup=v.findViewById(R.id.hidgroup);
         callNodeItemDetails(pro, v);
         //check no results condition here
 
@@ -118,6 +123,7 @@ public class prodInfo extends Fragment {
             public void onResponse(String response) {
                 spinbar.setVisibility(View.GONE);
                 showprodview.setVisibility(View.GONE);
+                toplayout.setVisibility(View.VISIBLE);
 
                 JSONObject iobj= null;
                 try {
