@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -32,6 +34,10 @@ public class wishlist extends Fragment {
 
     private List<productRecyclerList> wishlist_array;
     View v;
+    TextView wishlist_total_label;
+    TextView wishlist_total;
+    TextView nowish;
+    RelativeLayout wishtotal;
     SharedPreferences sp;
     Gson gson;
     private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener;
@@ -45,6 +51,10 @@ public class wishlist extends Fragment {
         wishRecyclerView = v.findViewById(R.id.wishlistRecyclerView);
         wishRecyclerView.setHasFixedSize(true);
         wishRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+        wishlist_total_label=v.findViewById(R.id.wishlistTotalLabel);
+        wishlist_total=v.findViewById(R.id.wishlistTotal);
+        wishtotal=v.findViewById(R.id.wishTotalLayout);
+        nowish=v.findViewById(R.id.nowishview);
 
         wishlist_array = new ArrayList<>();
         wishadp = new wishAdapter(wishlist_array, getActivity());
@@ -60,8 +70,17 @@ public class wishlist extends Fragment {
                                 map(w -> gson.fromJson(w, productRecyclerList.class)).collect(Collectors.toList());
                 wishlist_array.clear();
                 wishlist_array.addAll(list);
+
                 wishadp.setWishlist(wishlist_array);
                 wishadp.notifyDataSetChanged();
+                if(wishlist_array.size()!=0){
+                    calculateWishlistSum(wishlist_array);
+                    nowish.setVisibility(View.GONE);
+                }
+                else {
+                    wishtotal.setVisibility(View.GONE);
+                    noWishListShow();
+                }
 
 
             }
@@ -91,6 +110,22 @@ public class wishlist extends Fragment {
 
     }
 
+    private void calculateWishlistSum(List<productRecyclerList> wishlist_array) {
+
+        wishtotal.setVisibility(View.VISIBLE);
+        wishlist_total_label.setText("Wishlist total("+wishlist_array.size()+" items):");
+        Log.i("arrayxxx",wishlist_array.get(0).toString());
+        float sum=0;
+        for(int i=0;i<wishlist_array.size();i++){
+            productRecyclerList temp=wishlist_array.get(i);
+            sum+=Float.parseFloat(temp.getProduct_price().substring(1));
+        }
+        wishlist_total.setText("$"+sum);
+
+
+
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onResume() {
@@ -102,6 +137,20 @@ public class wishlist extends Fragment {
         ((wishAdapter) wishadp).setWishlist(list);
         sp.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
         wishadp.notifyDataSetChanged();
+        if(list.size()!=0){
+            calculateWishlistSum(list);
+            nowish.setVisibility(View.GONE);
+        }
+        else {
+            wishtotal.setVisibility(View.GONE);
+            noWishListShow();
+        }
+
+    }
+
+    private void noWishListShow() {
+        nowish.setVisibility(View.VISIBLE);
+
 
     }
 

@@ -84,20 +84,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="visible"
+
             android:layout_marginTop="20dp">
 
             <TextView
                 android:id="@+id/productConditionView"
                 android:layout_width="wrap_content"
+
                 android:layout_alignParentLeft="true"
-                android:layout_height="match_parent"/>
+                android:maxWidth="150dp"
+                android:layout_alignBaseline="@id/productPriceView"
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:id="@+id/productPriceView"
                 android:layout_width="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:text="$699.99"
+                android:layout_alignParentBottom="true"
+
                 android:textColor="@color/colorPrimary"
                 android:textSize="15dp"/>
 

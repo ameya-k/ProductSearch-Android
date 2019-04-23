@@ -39,6 +39,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -344,7 +346,11 @@ public class searchForm extends Fragment {
 
     private String constructSearchTableUrl() {
         String url="http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/ebaySearchTable/";
-        url+="kword="+keyword.getText().toString();
+        try {
+            url+="kword="+ URLEncoder.encode(keyword.getText().toString(),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         url+="&category="+spinnerValue;
         url+="&conditionNew="+nw.isChecked();
         url+="&conditionUsed="+used.isChecked();
@@ -353,14 +359,18 @@ public class searchForm extends Fragment {
         url+="&shippingFree="+free.isChecked();
         url+="&distance="+mileT.getText().toString();
         url+="&zipcode="+zipText.getText().toString();
+
+
         if(curBtn.isChecked()){
             url+="&location=current";
         }
-        else{
+        else if(zipBtn.isChecked()){
             url+="&location=zip";
         }
 
         url+="&currentlocation="+curloc;
+        url+="&nearBy="+nbox.isChecked();
+        Log.i("URl first:",url);
         return url;
 
 
@@ -390,6 +400,7 @@ public class searchForm extends Fragment {
 //        EditText keyword=v.findViewById(R.id.kword);
 //        RadioButton zipBtn=v.findViewById(R.id.zip_loc);
 //        EditText zipText=v.findViewById(R.id.zipcode);
+
         String expression="^[0-9]{5}(?:-[0-9]{4})?$";
         Pattern zipPattern=Pattern.compile(expression);
         Matcher match=zipPattern.matcher(zipText.getText().toString());

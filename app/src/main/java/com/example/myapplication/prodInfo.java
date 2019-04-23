@@ -339,14 +339,16 @@ public class prodInfo extends Fragment {
                     Log.i("Pic string",pcarray.getString(i));
                 }
 
-                HorizontalScrollView hscroll=v.findViewById(R.id.hscrollview);//
+                HorizontalScrollView hscroll=v.findViewById(R.id.hscrollview);
                 LinearLayout hscrolllayout = v.findViewById(R.id.hscrolllayout);
                 for(int i=0;i<pcarray.length();i++){
                     View vw=linflater.inflate(R.layout.horizimagelayout,hscrolllayout,false);
                     ImageView im=vw.findViewById(R.id.imagehorizview);
                     Log.i("getiing from pic array",picArray.get(i));
-                    Picasso.with(getActivity()).load(pcarray.getString(i)).into(im);
-                    hscrolllayout.addView(im);
+                    //Add try catch if image not found
+
+                        Picasso.with(getActivity()).load(pcarray.getString(i)).into(im);
+                        hscrolllayout.addView(im);
 
                 }
 

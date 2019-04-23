@@ -94,6 +94,7 @@ public class ResultTableActivity extends AppCompatActivity {
 
 
         String nodeUrl=intent.getStringExtra("url");
+
         prodTitle=intent.getStringExtra("kw");
         Log.i("Url in result activty",nodeUrl);
         //spinwheel.show();

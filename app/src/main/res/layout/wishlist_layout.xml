@@ -4,6 +4,17 @@
     android:orientation="vertical"
      >
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No wishes"
+        android:layout_gravity="center"
+        android:layout_marginTop="300dp"
+        android:visibility="gone"
+        android:id="@+id/nowishview"
+
+        />
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,6 +31,40 @@
 
 
         </android.support.v7.widget.RecyclerView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/wishTotalLayout"
+            android:layout_alignParentBottom="true"
+
+            android:background="@color/formBtnBackground"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wishlistTotalLabel"
+               android:layout_alignParentLeft="true"
+
+                android:padding="5dp"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="10dp"
+                android:textSize="26sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wishlistTotal"
+                android:layout_alignParentRight="true"
+                android:textSize="26sp"
+                android:padding="5dp"
+                android:textColor="@android:color/white"
+                android:layout_marginRight="10dp"
+                />
+
+
+        </RelativeLayout>
 
 
 
