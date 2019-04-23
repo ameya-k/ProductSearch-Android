@@ -43,6 +43,8 @@
         android:layout_height="wrap_content"
         android:text="No similar items"
         android:visibility="gone"
+        android:layout_gravity="center"
+        android:layout_marginTop="300dp"
         android:id="@+id/nosimitemsview"/>
 
 
