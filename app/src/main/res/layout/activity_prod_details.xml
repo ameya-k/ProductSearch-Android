@@ -83,6 +83,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/formBtnBackground"
+
+        android:tint="@android:color/white"
         app:srcCompat="@drawable/addwishlist" />
 
 

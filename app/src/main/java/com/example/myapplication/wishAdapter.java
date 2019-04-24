@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -75,6 +76,14 @@ public class wishAdapter extends RecyclerView.Adapter<wishAdapter.ViewHolder> {
                     sp.edit().remove(prlist.getItem_id()).commit();
 
 
+                }
+            });
+            viewHolder.wishlLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i=new Intent(v.getContext(),prodDetailsActivity.class);
+                    i.putExtra("firstData",prlist);
+                    v.getContext().startActivity(i);
                 }
             });
 

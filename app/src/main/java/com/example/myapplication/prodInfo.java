@@ -26,6 +26,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -173,7 +175,7 @@ public class prodInfo extends Fragment {
         String specifics_string="";
         specview.setText("");
         if(!("default".equals(brand))){
-            specifics_string+="\u2022"+brand;
+            specifics_string+="\u2022"+brand+"\n\n";
         }
 
         try {
@@ -279,7 +281,7 @@ public class prodInfo extends Fragment {
         TextView sh=v.findViewById(R.id.prodship);
         Log.i("pro price:",pro.getProduct_price());
         Log.i("pro ship",pro.getProduct_shipping());
-        if(pro.getProduct_price()=="N/A" && pro.getProduct_shipping()=="N/A"){
+        if(pro.getProduct_price().equals("N/A") && pro.getProduct_shipping().equals("N/A")){
 
             pr.setVisibility(View.GONE);
             sh.setVisibility(View.GONE);
@@ -287,9 +289,9 @@ public class prodInfo extends Fragment {
             return false;
 
         }
-        if(pro.getProduct_price()=="N/A" && pro.getProduct_shipping()!="N/A"){
+        if(pro.getProduct_price().equals("N/A") && !pro.getProduct_shipping().equals("N/A")){
             pr.setVisibility(View.GONE);
-            if(pro.getProduct_shipping()=="Free Shipping"){
+            if(pro.getProduct_shipping().equals("Free Shipping")){
                 sh.setText("With "+pro.getProduct_shipping());
             }
             else{
@@ -297,13 +299,13 @@ public class prodInfo extends Fragment {
             }
 
         }
-        if(pro.getProduct_shipping()=="N/A" && pro.getProduct_price()!="N/A"){
+        if(pro.getProduct_shipping().equals("N/A") && !pro.getProduct_price().equals("N/A")){
             sh.setVisibility(View.GONE);
             pr.setText(pro.getProduct_price());
         }
-        if(pro.getProduct_shipping()!="N/A" && pro.getProduct_price()!="N/A"){
+        if(!pro.getProduct_shipping().equals("N/A") && !pro.getProduct_price().equals("N/A")){
             pr.setText(pro.getProduct_price());
-            if(pro.getProduct_shipping()=="Free Shipping"){
+            if(("Free Shipping").equals(pro.getProduct_shipping())){
                 sh.setText("With "+pro.getProduct_shipping());
 
             }
@@ -347,8 +349,9 @@ public class prodInfo extends Fragment {
                     Log.i("getiing from pic array",picArray.get(i));
                     //Add try catch if image not found
 
-                        Picasso.with(getActivity()).load(pcarray.getString(i)).into(im);
-                        hscrolllayout.addView(im);
+                    //use fit
+                    Glide.with(getActivity()).load(pcarray.getString(i)).into(im);
+                    hscrolllayout.addView(im);
 
                 }
 
