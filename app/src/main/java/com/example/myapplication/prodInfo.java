@@ -119,6 +119,7 @@ public class prodInfo extends Fragment {
     private void callNodeItemDetails(final productRecyclerList pro, final View v) {
 
         String callURL="http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/itemDetailsCall/"+pro.getItem_id();
+        Log.i("iturlxxx",callURL);
 
         StringRequest request=new StringRequest(Request.Method.GET, callURL, new Response.Listener<String>() {
             @Override

@@ -91,6 +91,7 @@
                     android:id="@+id/wishProductConditionTextView"
                     android:layout_width="wrap_content"
                     android:layout_alignParentLeft="true"
+                    android:maxWidth="150dp"
                     android:text="used"
                     android:layout_height="wrap_content"/>
 
@@ -101,6 +102,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:text="100dp"
+                    android:layout_alignParentBottom="true"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15dp"/>
 

@@ -96,6 +96,7 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
                     viewHolder.wishBtn.setBackground(v.getContext().getDrawable(R.drawable.addwishlist));
                     Log.i("Xx Removed item:",prlist.getItem_id());
                     Log.i("XXpref listXX", String.valueOf(sp.getAll()));
+                    Toast.makeText(con,prlist.getTitle().substring(0,prlist.getTitle().length()-10)+"..."+" removed from wishlist",Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -105,6 +106,7 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
                     sp.edit().putString(prlist.getItem_id(),json).commit();
 
                     viewHolder.wishBtn.setBackground(v.getContext().getDrawable(R.drawable.removewishlist));
+                    Toast.makeText(con,prlist.getTitle().substring(0,prlist.getTitle().length()-10)+"..."+" added to wishlist",Toast.LENGTH_SHORT).show();
                     Log.i("XXAdded item:",prlist.getItem_id());
                     Log.i("XXpref listXX", String.valueOf(sp.getAll()));
                 }

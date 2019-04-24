@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -74,6 +75,7 @@ public class wishAdapter extends RecyclerView.Adapter<wishAdapter.ViewHolder> {
                     Log.v("abc","clciked");
 
                     sp.edit().remove(prlist.getItem_id()).commit();
+                    Toast.makeText(con,prlist.getTitle().substring(0,prlist.getTitle().length()-10)+"..."+ "removed from wishlist",Toast.LENGTH_SHORT).show();
 
 
                 }

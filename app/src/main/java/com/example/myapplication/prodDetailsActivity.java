@@ -172,12 +172,14 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
                    Log.i("XXAdded to wishlist",tem.getItem_id());
                    Log.i("Wishlist:", String.valueOf(sp.getAll()));
                    fab.setImageResource(R.drawable.removewishlist);
+                   Toast.makeText(getApplicationContext(),tem.getTitle().substring(0,tem.getTitle().length()-10)+"..."+" added to wishlist",Toast.LENGTH_SHORT).show();
 
                }
                //Remove from wishlist
                else{
                 fab.setImageResource(R.drawable.addwishlist);
                 sp.edit().remove(tem.getItem_id()).commit();
+                   Toast.makeText(getApplicationContext(),tem.getTitle().substring(0,tem.getTitle().length()-10)+"..."+" removed from wishlist",Toast.LENGTH_SHORT).show();
                 Log.i("XXRemoved item:",tem.getItem_id());
                 Log.i("wishlist", String.valueOf(sp.getAll()));
                }

@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -329,7 +331,7 @@ public class prodShip extends Fragment {
 
                 int index=itemDetObj.getJSONObject("Item").getJSONObject("Seller").getString("FeedbackRatingStar").indexOf("Shooting");
                 if(index!=-1){
-                    feedback_star_color=itemDetObj.getJSONObject("Item").getJSONObject("Seller").getString("FeedbackRatingStar").substring(0,index-1);
+                    feedback_star_color=itemDetObj.getJSONObject("Item").getJSONObject("Seller").getString("FeedbackRatingStar").substring(0,index);
                 }
                 else{
                     feedback_star_color=itemDetObj.getJSONObject("Item").getJSONObject("Seller").getString("FeedbackRatingStar");
@@ -338,11 +340,59 @@ public class prodShip extends Fragment {
                 if(index==-1){
                    // Drawable d=getContext().getResources().getDrawable(R.drawable.star_circle);
                   //  d.setTint(feedback_star_color);
+                    Drawable d= ContextCompat.getDrawable(getContext(),R.drawable.star_circle_outline);
+                    Drawable wd= DrawableCompat.wrap(d);
+                    if(feedback_star_color.equals("Yellow")){
+                        DrawableCompat.setTint(wd,ContextCompat.getColor(getContext(),R.color.Yellow));
+                    }
+                    else if(feedback_star_color.equals("Blue")){
+                        DrawableCompat.setTint(wd,ContextCompat.getColor(getContext(),R.color.Blue));
+                    }
+                    else if(feedback_star_color.equals("Green")){
+                        DrawableCompat.setTint(wd,ContextCompat.getColor(getContext(),R.color.Green));
+                    }
+                    else if(feedback_star_color.equals("Turquoise")){
+                        DrawableCompat.setTint(wd,ContextCompat.getColor(getContext(),R.color.Turquoise));
+                    }
+                    else if(feedback_star_color.equals("Red")){
+                        DrawableCompat.setTint(wd,ContextCompat.getColor(getContext(),R.color.Red));
+                    }
+                    else if(feedback_star_color.equals("Purple")){
+                        DrawableCompat.setTint(wd,ContextCompat.getColor(getContext(),R.color.Purple));
+                    }
+                    else {
+                        DrawableCompat.setTint(wd,ContextCompat.getColor(getContext(),R.color.Black));
 
+                    }
+                    //DrawableCompat.setTint(wd,ContextCompat.getColor(getContext(),));
 
                     starimg.setImageResource(R.drawable.star_circle_outline);
                 }
                 else{
+                    Drawable d1= ContextCompat.getDrawable(getContext(),R.drawable.star_circle);
+                    Drawable wd1= DrawableCompat.wrap(d1);
+                    if(feedback_star_color.equals("Yellow")){
+                        DrawableCompat.setTint(wd1,ContextCompat.getColor(getContext(),R.color.Yellow));
+                    }
+                    else if(feedback_star_color.equals("Blue")){
+                        DrawableCompat.setTint(wd1,ContextCompat.getColor(getContext(),R.color.Blue));
+                    }
+                    else if(feedback_star_color.equals("Green")){
+                        DrawableCompat.setTint(wd1,ContextCompat.getColor(getContext(),R.color.Green));
+                    }
+                    else if(feedback_star_color.equals("Turquoise")){
+                        DrawableCompat.setTint(wd1,ContextCompat.getColor(getContext(),R.color.Turquoise));
+                    }
+                    else if(feedback_star_color.equals("Red")){
+                        DrawableCompat.setTint(wd1,ContextCompat.getColor(getContext(),R.color.Red));
+                    }
+                    else if(feedback_star_color.equals("Purple")){
+                        DrawableCompat.setTint(wd1,ContextCompat.getColor(getContext(),R.color.Purple));
+                    }
+                    else {
+                        DrawableCompat.setTint(wd1,ContextCompat.getColor(getContext(),R.color.Black));
+
+                    }
                     starimg.setImageResource(R.drawable.star_circle);
                 }
 
