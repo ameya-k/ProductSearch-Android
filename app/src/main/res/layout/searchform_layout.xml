@@ -6,11 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <TextView
             android:id="@+id/kword_label"
@@ -19,6 +21,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:text="Keyword"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,6 +34,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
             android:ems="10"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             android:hint="Enter Keyword"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,6 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             android:text="Please enter mandatory field"
             android:textColor="@android:color/holo_red_light"
             android:visibility="invisible"
@@ -57,6 +65,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
             android:text="Category"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kword" />
 
@@ -68,6 +78,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/category_label" />
 
@@ -78,6 +90,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:text="Condition"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/category" />
 
@@ -88,6 +102,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:text="New"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/condition_label" />
 
@@ -98,6 +114,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:text="Used"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintStart_toEndOf="@+id/newBox"
             app:layout_constraintTop_toBottomOf="@+id/condition_label" />
 
@@ -108,6 +126,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:text="Unspecified"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintStart_toEndOf="@+id/usedBox"
             app:layout_constraintTop_toBottomOf="@+id/condition_label" />
 
@@ -118,6 +138,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:text="Shipping Options"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/newBox" />
 
@@ -128,6 +150,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:text="Local Pickup"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shiiping_label" />
 
@@ -138,6 +162,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:text="Free Shipping"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintStart_toEndOf="@+id/localBox"
             app:layout_constraintTop_toBottomOf="@+id/shiiping_label" />
 
@@ -148,6 +174,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:text="Enable nearby search"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/localBox" />
 
@@ -175,6 +203,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
             android:ems="10"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             android:hint="Miles From"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
@@ -188,6 +218,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
             android:text="From"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/miles" />
 
@@ -205,11 +237,15 @@
                 android:checked="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-monospace"
+                android:letterSpacing="0.1"
                 android:text="Current location" />
 
             <RadioButton
                 android:id="@+id/zip_loc"
                 android:layout_width="wrap_content"
+                android:fontFamily="sans-serif-monospace"
+                android:letterSpacing="0.1"
                 android:layout_height="wrap_content"
                 android:text="" />
 
@@ -227,7 +263,7 @@
             android:hint="zipcode"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.12"
+            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="@+id/radioGroup"
             app:layout_constraintTop_toTopOf="@+id/radioGroup" />
 
@@ -239,6 +275,8 @@
             android:layout_below="@id/zipcode"
             android:layout_marginTop="50dp"
             android:visibility="gone"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             android:padding="20dp"/>
 
         <TextView
@@ -251,6 +289,8 @@
             android:visibility="invisible"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintBottom_toTopOf="@+id/submitBtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/zipcode" />
@@ -264,6 +304,8 @@
             android:background="@color/formBtnBackground"
             android:textColor="@android:color/white"
             android:text="Search"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
@@ -275,6 +317,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:text="Clear"
+            android:fontFamily="sans-serif-monospace"
+            android:letterSpacing="0.1"
             android:textColor="@android:color/white"
             android:background="@color/formBtnBackground"
             app:layout_constraintEnd_toEndOf="parent"
