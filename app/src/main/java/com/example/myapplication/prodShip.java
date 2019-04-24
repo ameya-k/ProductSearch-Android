@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wssholmes.stark.circular_score.CircularScoreView;
 
@@ -284,10 +287,24 @@ public class prodShip extends Fragment {
 
 
             String storeName="";
+            String storeUrl="";
+
 
             try{
                 storeName=itemDetObj.getJSONObject("Item").getJSONObject("Storefront").getString("StoreName");
-                sname.setText(storeName);
+                try {
+                    storeUrl = itemDetObj.getJSONObject("Item").getJSONObject("Storefront").getString("StoreURL");
+                }
+                catch (Exception e){
+                    storeUrl="#";
+                    Toast.makeText(getContext(),"No url found",Toast.LENGTH_SHORT);
+                }
+                sname.setText(Html.fromHtml("<a href=\""+ storeUrl + "\">" + storeName + "</a>"));
+
+                sname.setMovementMethod(LinkMovementMethod.getInstance());
+                Log.i("xxsname",sname.getText().toString());
+                //sname.setText(storeName);
+                //sname.setMovementMethod (LinkMovementMethod.getInstance());
                 flag_storename=true;
 
             }catch (JSONException je){
