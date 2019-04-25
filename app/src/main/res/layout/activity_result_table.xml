@@ -38,15 +38,45 @@
       />
 </LinearLayout>
 
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+
     <TextView
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/resultCountText"
     android:layout_marginBottom="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="3dp"
-    />
+        android:textStyle="bold"
 
+    />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:id="@+id/sizetext"-->
+            <!--android:textColor="@color/formBtnBackground"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:id="@+id/pretitletext"-->
+            <!--android:textStyle="bold"-->
+            <!--android:text="results for"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:id="@+id/kwordtext"/>-->
+
+
+    <!--</LinearLayout>-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"

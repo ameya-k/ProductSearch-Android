@@ -11,7 +11,10 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -47,6 +50,7 @@ public class ResultTableActivity extends AppCompatActivity {
     ProgressBar pb;
     TextView tv;
     TextView npview;
+    TextView sizetext,kwordtext;
 
     @Override
     protected void onResume() {
@@ -71,6 +75,8 @@ public class ResultTableActivity extends AppCompatActivity {
         tv=findViewById(R.id.showProductsText);
         pb.setVisibility(View.VISIBLE);
         pb.setVisibility(View.VISIBLE);
+        //sizetext=findViewById(R.id.sizetext);
+        //kwordtext=findViewById(R.id.kwordtext);
 
         npview=findViewById(R.id.noproductsview);
 
@@ -158,8 +164,18 @@ public class ResultTableActivity extends AppCompatActivity {
             }
             TextView reshead=findViewById(R.id.resultCountText);
             String text="Showing "+size+ " results for "+prodTitle;
+            Spannable span=new SpannableString(text);
+            if(size>=10){
+                span.setSpan(new ForegroundColorSpan(Color.CYAN),8,10,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new ForegroundColorSpan(Color.CYAN),23,text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            else{
+                span.setSpan(new ForegroundColorSpan(Color.CYAN),8,9,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new ForegroundColorSpan(Color.CYAN),22,text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
 
-            reshead.setText(text);
+
+            reshead.setText(span,TextView.BufferType.SPANNABLE);
             
             Log.i("demo json",""+jb.getJSONArray("title").get(0).toString());
 

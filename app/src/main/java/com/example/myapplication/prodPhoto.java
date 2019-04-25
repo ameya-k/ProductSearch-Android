@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -129,7 +130,12 @@ public class prodPhoto extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String googleUrl="http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/googleCall/"+ URLEncoder.encode(title);
+        String googleUrl= null;
+        try {
+            googleUrl = "http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/googleCall/"+ URLEncoder.encode(title,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         Log.i("goog",googleUrl);
         StringRequest request=new StringRequest(Request.Method.GET, googleUrl, new Response.Listener<String>() {
             @Override
@@ -140,6 +146,7 @@ public class prodPhoto extends Fragment {
                     JSONArray items = photoresult.getJSONArray("items");
 
                     for(int i=0;i<items.length();i++){
+
                         String url=items.getJSONObject(i).getString("link");
                         Log.i("Photo url",url);
                         photoModel model=new photoModel(url);
