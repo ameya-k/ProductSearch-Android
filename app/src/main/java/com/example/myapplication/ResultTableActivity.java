@@ -166,12 +166,12 @@ public class ResultTableActivity extends AppCompatActivity {
             String text="Showing "+size+ " results for "+prodTitle;
             Spannable span=new SpannableString(text);
             if(size>=10){
-                span.setSpan(new ForegroundColorSpan(Color.CYAN),8,10,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                span.setSpan(new ForegroundColorSpan(Color.CYAN),23,text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new ForegroundColorSpan(Color.rgb(210,150,136)),8,10,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new ForegroundColorSpan(Color.rgb(210,150,136)),23,text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
             else{
-                span.setSpan(new ForegroundColorSpan(Color.CYAN),8,9,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                span.setSpan(new ForegroundColorSpan(Color.CYAN),22,text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new ForegroundColorSpan(Color.rgb(210,150,136)),8,9,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new ForegroundColorSpan(Color.rgb(210,150,136)),22,text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
 
