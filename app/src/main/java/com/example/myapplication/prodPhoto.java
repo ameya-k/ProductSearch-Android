@@ -130,23 +130,15 @@ public class prodPhoto extends Fragment {
             e.printStackTrace();
         }
         String googleUrl="http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/googleCall/"+ URLEncoder.encode(title);
+        Log.i("goog",googleUrl);
         StringRequest request=new StringRequest(Request.Method.GET, googleUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
                 try {
                     JSONObject photoresult=new JSONObject(response);
-                    JSONArray items=null;
-                    try {
-                        items = photoresult.getJSONArray("items");
-                    }
-                    catch (Exception e){
-                        nophotview.setVisibility(View.VISIBLE);
+                    JSONArray items = photoresult.getJSONArray("items");
 
-                    }
-                    if(items.length()==0){
-                        nophotview.setVisibility(View.VISIBLE);
-                    }
                     for(int i=0;i<items.length();i++){
                         String url=items.getJSONObject(i).getString("link");
                         Log.i("Photo url",url);
@@ -160,6 +152,7 @@ public class prodPhoto extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    nophotview.setVisibility(View.VISIBLE);
                 }
 
 
