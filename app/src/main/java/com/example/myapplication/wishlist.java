@@ -73,14 +73,13 @@ public class wishlist extends Fragment {
 
                 wishadp.setWishlist(wishlist_array);
                 wishadp.notifyDataSetChanged();
-                if(wishlist_array.size()!=0){
+                if(wishlist_array.size()==0) {
+                    nowish.setVisibility(View.VISIBLE);
+                }
                     calculateWishlistSum(wishlist_array);
-                    nowish.setVisibility(View.GONE);
-                }
-                else {
-                    wishtotal.setVisibility(View.GONE);
-                    noWishListShow();
-                }
+
+
+
 
 
             }
@@ -112,7 +111,7 @@ public class wishlist extends Fragment {
 
     private void calculateWishlistSum(List<productRecyclerList> wishlist_array) {
 
-        wishtotal.setVisibility(View.VISIBLE);
+        //wishtotal.setVisibility(View.VISIBLE);
         if(wishlist_array.size()==1){
             wishlist_total_label.setText("Wishlist total("+wishlist_array.size()+" item):");
         }
@@ -120,7 +119,7 @@ public class wishlist extends Fragment {
             wishlist_total_label.setText("Wishlist total("+wishlist_array.size()+" items):");
         }
 
-        Log.i("arrayxxx",wishlist_array.get(0).toString());
+        //Log.i("arrayxxx",wishlist_array.get(0).toString());
         float sum=0;
         for(int i=0;i<wishlist_array.size();i++){
             productRecyclerList temp=wishlist_array.get(i);
@@ -148,7 +147,8 @@ public class wishlist extends Fragment {
             nowish.setVisibility(View.GONE);
         }
         else {
-            wishtotal.setVisibility(View.GONE);
+            //wishtotal.setVisibility(View.GONE);
+            calculateWishlistSum(list);
             noWishListShow();
         }
 
