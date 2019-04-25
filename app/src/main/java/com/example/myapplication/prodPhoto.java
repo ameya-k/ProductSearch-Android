@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,6 +38,7 @@ public class prodPhoto extends Fragment {
     private RecyclerView.Adapter photoAdapter;
     String itemDetailsData;
     private List<photoModel> photoItems;
+    private TextView nophotview;
 
     public prodPhoto() {
         // Required empty public constructor
@@ -77,6 +79,8 @@ public class prodPhoto extends Fragment {
 
 
         photoRecyclerView=v.findViewById(R.id.photoRecyclerView);
+        nophotview=v.findViewById(R.id.noPhotView);
+
 
 
 
@@ -132,10 +136,20 @@ public class prodPhoto extends Fragment {
 
                 try {
                     JSONObject photoresult=new JSONObject(response);
-                    JSONArray items=photoresult.getJSONArray("items");
+                    JSONArray items=null;
+                    try {
+                        items = photoresult.getJSONArray("items");
+                    }
+                    catch (Exception e){
+                        nophotview.setVisibility(View.VISIBLE);
 
+                    }
+                    if(items.length()==0){
+                        nophotview.setVisibility(View.VISIBLE);
+                    }
                     for(int i=0;i<items.length();i++){
                         String url=items.getJSONObject(i).getString("link");
+                        Log.i("Photo url",url);
                         photoModel model=new photoModel(url);
                         photoItems.add(model);
                     }

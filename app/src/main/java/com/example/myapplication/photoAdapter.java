@@ -34,7 +34,7 @@ public class photoAdapter extends RecyclerView.Adapter<photoAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
          photoModel temModel=photoList.get(i);
-         Picasso.with(con).load(temModel.getImageLink()).into(viewHolder.photocard);
+         Picasso.with(con).load(temModel.getImageLink()).error(R.drawable.brimage).into(viewHolder.photocard);
 
     }
 

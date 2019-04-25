@@ -43,7 +43,7 @@ public class simItemAdapter extends RecyclerView.Adapter<simItemAdapter.ViewHold
             viewHolder.simDaysLeft.setText(specCard.getDays_left());
             viewHolder.simPrice.setText(specCard.getPrice());
 
-            Picasso.with(con).load(specCard.getImage_link()).into(viewHolder.simimage);
+            Picasso.with(con).load(specCard.getImage_link()).error(R.drawable.brimage).into(viewHolder.simimage);
 
 
             viewHolder.cardcontainer.setOnClickListener(new View.OnClickListener() {
