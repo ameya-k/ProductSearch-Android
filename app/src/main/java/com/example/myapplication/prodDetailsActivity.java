@@ -247,6 +247,7 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
             fbhref=job.getJSONObject("Item").getString("ViewItemURLForNaturalSearch");
         } catch (JSONException e) {
             e.printStackTrace();
+            fbhref="http://www.ebay.com";
         }
 
         ViewPager pager=findViewById(R.id.container);
@@ -254,16 +255,16 @@ public class prodDetailsActivity extends AppCompatActivity implements prodInfo.O
           prodShip shipfragment=(prodShip)adp.instantiateItem(pager,1);
           shipfragment.setItemData(message);
 
-        Log.i("XXXXX","pre");
+        //Log.i("XXXXX","pre");
 
         FragmentPagerAdapter photadp=(FragmentPagerAdapter)pager.getAdapter();
         prodPhoto photofragment=(prodPhoto)photadp.instantiateItem(pager,2);
         photofragment.setItemDetails(message);
 
 
-        Log.i("XXXXX","post");
+        //Log.i("XXXXX","post");
 
-          Log.i("Data in Activity",message);
+          //Log.i("Data in Activity",message);
     }
 
 

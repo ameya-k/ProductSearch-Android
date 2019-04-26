@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class photoAdapter extends RecyclerView.Adapter<photoAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
          photoModel temModel=photoList.get(i);
-         Picasso.with(con).load(temModel.getImageLink()).error(R.drawable.brimage).into(viewHolder.photocard);
+         Glide.with(con).load(temModel.getImageLink()).error(R.drawable.brimage).into(viewHolder.photocard);
 
     }
 

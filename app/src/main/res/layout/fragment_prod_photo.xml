@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".prodPhoto"
-    android:background="#f5f0f0"
-
-    >
+    android:background="#f5f0f0">
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,24 +14,11 @@
         android:layout_marginTop="300dp"
         android:layout_marginLeft="150dp"
         android:visibility="gone"
-        android:id="@+id/noPhotView"
-        />
-
-
+        android:id="@+id/noPhotView" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/photoRecyclerView"
-
-        >
-
-
-
-
-    </android.support.v7.widget.RecyclerView>
-
-
-
+        android:id="@+id/photoRecyclerView" />
 
 </LinearLayout>

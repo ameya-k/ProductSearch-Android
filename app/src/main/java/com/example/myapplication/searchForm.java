@@ -345,7 +345,8 @@ public class searchForm extends Fragment {
     }
 
     private String constructSearchTableUrl() {
-        String url="http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/ebaySearchTable/";
+       String url="http://ameyabk117-angularweb8.appspot.com/ebaySearchTable/";
+        //String url="http://192.168.1.14:3000/ebaySearchTable/";
         try {
             url+="kword="+ URLEncoder.encode(keyword.getText().toString(),"UTF-8");
         } catch (UnsupportedEncodingException e) {

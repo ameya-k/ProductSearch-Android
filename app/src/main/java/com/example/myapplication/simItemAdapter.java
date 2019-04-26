@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.net.URLEncoder;
@@ -43,7 +44,7 @@ public class simItemAdapter extends RecyclerView.Adapter<simItemAdapter.ViewHold
             viewHolder.simDaysLeft.setText(specCard.getDays_left());
             viewHolder.simPrice.setText(specCard.getPrice());
 
-            Picasso.with(con).load(specCard.getImage_link()).error(R.drawable.brimage).into(viewHolder.simimage);
+            Glide.with(con).load(specCard.getImage_link()).error(R.drawable.brimage).into(viewHolder.simimage);
 
 
             viewHolder.cardcontainer.setOnClickListener(new View.OnClickListener() {

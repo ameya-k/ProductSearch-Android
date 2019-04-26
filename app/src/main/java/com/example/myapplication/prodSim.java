@@ -79,7 +79,7 @@ private List<simItemModel> copyList;
         // Inflate the layout for this fragment
         itemsPresent=true;
         pro=getArguments().getParcelable("firstData");
-        Log.i("title in sim:",pro.getTitle());
+        //Log.i("title in sim:",pro.getTitle());
         v=inflater.inflate(R.layout.fragment_prod_sim, container, false);
         populateSpinners(v,pro);
 

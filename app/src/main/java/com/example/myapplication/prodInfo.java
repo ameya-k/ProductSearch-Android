@@ -150,7 +150,7 @@ public class prodInfo extends Fragment {
                         TextView nores=v.findViewById(R.id.noresview);
                         nores.setVisibility(View.VISIBLE);
                     }
-                    Log.i("images sec",""+pr_images_sec);
+                   // Log.i("images sec",""+pr_images_sec);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -158,7 +158,7 @@ public class prodInfo extends Fragment {
                 //Constructing various layout components
 
 
-               Log.i("itemdetails",response.toString());
+               //Log.i("itemdetails",response.toString());
 
             }
         }, new Response.ErrorListener() {
@@ -351,7 +351,7 @@ public class prodInfo extends Fragment {
 
                 HorizontalScrollView hscroll=v.findViewById(R.id.hscrollview);
                 LinearLayout hscrolllayout = v.findViewById(R.id.hscrolllayout);
-                Log.i("pcarray size",""+pcarray.length());
+                //Log.i("pcarray size",""+pcarray.length());
                 for(int i=0;i<pcarray.length();i++){
                     View vw=linflater.inflate(R.layout.horizimagelayout,hscrolllayout,false);
                     ImageView im=vw.findViewById(R.id.imagehorizview);
@@ -359,10 +359,10 @@ public class prodInfo extends Fragment {
                     //Add try catch if image not found
 
                     //use fit
-                    Log.i("Loading image",""+(i+1));
+//                    Log.i("Loading image",""+(i+1));
 
 
-                    Glide.with(getActivity()).load(pcarray.getString(i)).listener(new RequestListener<Drawable>() {
+                    Glide.with(getActivity()).load(pcarray.getString(i)).fitCenter().listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
 

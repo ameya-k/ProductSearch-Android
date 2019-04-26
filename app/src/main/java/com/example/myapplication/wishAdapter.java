@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -56,7 +57,7 @@ public class wishAdapter extends RecyclerView.Adapter<wishAdapter.ViewHolder> {
         final productRecyclerList prlist=wishlist.get(i);
 
 
-        Picasso.with(con).load(prlist.getImage_url()).error(R.drawable.brimage).into(viewHolder.wishproductImage);
+        Glide.with(con).load(prlist.getImage_url()).error(R.drawable.brimage).into(viewHolder.wishproductImage);
         viewHolder.wishproductTitle.setText(prlist.getTitle());
         viewHolder.wishproductPrice.setText(prlist.getProduct_price());
         viewHolder.wishproductCondition.setText(prlist.getProduct_condition());
@@ -72,7 +73,7 @@ public class wishAdapter extends RecyclerView.Adapter<wishAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
 
-                    Log.v("abc","clciked");
+                    //Log.v("abc","clciked");
 
                     sp.edit().remove(prlist.getItem_id()).commit();
                     Toast.makeText(con,prlist.getTitle().substring(0,prlist.getTitle().length()-10)+"..."+ "removed from wishlist",Toast.LENGTH_SHORT).show();

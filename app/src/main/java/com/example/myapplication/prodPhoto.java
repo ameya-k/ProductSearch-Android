@@ -74,7 +74,7 @@ public class prodPhoto extends Fragment {
         // Inflate the layout for this fragment
 
         pro=getArguments().getParcelable("firstData");
-        Log.i("XXXXX","in oncreateview");
+        //Log.i("XXXXX","in oncreateview");
 
         v=inflater.inflate(R.layout.fragment_prod_photo, container, false);
 
@@ -103,10 +103,10 @@ public class prodPhoto extends Fragment {
 
 
     public void setItemDetails(String dataFromActivity){
-        Log.i("XXXXX","in setItemdetails");
+        //Log.i("XXXXX","in setItemdetails");
 
         this.itemDetailsData=dataFromActivity;
-        Log.i("Item details-photo",itemDetailsData);
+        //Log.i("Item details-photo",itemDetailsData);
 
 
         photoRecyclerView.setHasFixedSize(true);
@@ -127,13 +127,16 @@ public class prodPhoto extends Fragment {
 
 
 
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
         String googleUrl= null;
         try {
-            googleUrl = "http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/googleCall/"+ URLEncoder.encode(title,"UTF-8");
-        } catch (UnsupportedEncodingException e) {
+          googleUrl = "http://ameyanodemodule-dot-ameyabk117-angularweb8.appspot.com/googleCall/"+URLEncoder.encode(title,"UTF-8");
+            //googleUrl = "http://192.168.1.14:3000/googleCall/"+ URLEncoder.encode(title,"UTF-8");
+            //googleUrl="http://www.google.com";
+        } catch (Exception e) {
             e.printStackTrace();
         }
         Log.i("goog",googleUrl);
@@ -144,6 +147,7 @@ public class prodPhoto extends Fragment {
                 try {
                     JSONObject photoresult=new JSONObject(response);
                     JSONArray items = photoresult.getJSONArray("items");
+                    Log.i("xxxsize","items size"+items.length());
 
                     for(int i=0;i<items.length();i++){
 
@@ -167,7 +171,7 @@ public class prodPhoto extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.v("xxxsize", error.toString());
             }
         });
 

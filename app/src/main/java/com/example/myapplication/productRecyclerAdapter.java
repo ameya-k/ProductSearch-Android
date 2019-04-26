@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -56,7 +57,7 @@ public class productRecyclerAdapter extends RecyclerView.Adapter<productRecycler
        //we set the values of elements from layout from our list of class objects
 
         //use picasso to load image here
-        Picasso.with(con).load(prlist.getImage_url()).error(R.drawable.brimage).into(viewHolder.productImage);
+        Glide.with(con).load(prlist.getImage_url()).error(R.drawable.brimage).into(viewHolder.productImage);
         viewHolder.productTitle.setText(prlist.getTitle());
         viewHolder.productPrice.setText(prlist.getProduct_price());
         viewHolder.productCondition.setText(prlist.getProduct_condition());

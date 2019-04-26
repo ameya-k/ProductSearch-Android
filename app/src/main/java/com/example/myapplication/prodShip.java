@@ -201,11 +201,11 @@ public class prodShip extends Fragment {
             try {
                 String temp=itemDetObj.getJSONObject("Item").getString("GlobalShipping");
                 if("false".equals(temp)){
-                    globshiptext="Yes";
+                    globshiptext="No";
                     flag_globship=true;
                 }
                 else{
-                    globshiptext="No";
+                    globshiptext="Yes";
                     flag_globship=true;
                 }
                 globship.setText(globshiptext);
@@ -449,7 +449,7 @@ public class prodShip extends Fragment {
         // Inflate the layout for this fragment
 
         pro=getArguments().getParcelable("firstData");
-        Log.i("title in shipping:",pro.getTitle());
+        //Log.i("title in shipping:",pro.getTitle());
         v=inflater.inflate(R.layout.fragment_prod_ship, container, false);
         //Log.i("item data in ship",itemData);
         return v;
